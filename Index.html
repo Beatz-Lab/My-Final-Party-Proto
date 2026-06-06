@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Last Word — Send-Off Planner</title>
+  <style>
+    :root {
+      --bg: #f8f4ec;
+      --panel: #fffdf8;
+      --ink: #243330;
+      --muted: #6f7f79;
+      --teal: #4d8f85;
+      --teal-dark: #356e67;
+      --coral: #e58d74;
+      --gold: #ddb55c;
+      --line: #e6dfd3;
+      --shadow: 0 16px 40px rgba(62, 78, 72, 0.12);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(229,141,116,.13), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(77,143,133,.12), transparent 30%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+
+    .app-shell {
+      width: min(1100px, calc(100% - 28px));
+      margin: 20px auto 56px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 6px 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--teal), var(--coral));
+      box-shadow: 0 8px 22px rgba(77,143,133,.25);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .home-btn {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 800;
+      display: none;
+      align-items: center;
+      gap: 7px;
+      box-shadow: 0 6px 18px rgba(62, 78, 72, 0.08);
+    }
+
+    .home-btn:hover {
+      background: white;
+      transform: translateY(-1px);
+    }
+
+    .save-state {
+      font-size: .9rem;
+      color: var(--muted);
+      min-height: 1.2em;
+    }
+
+    .hero, .wizard, .summary {
+      background: rgba(255,253,248,.96);
+      border: 1px solid rgba(255,255,255,.7);
+      box-shadow: var(--shadow);
+      border-radius: 30px;
+      overflow: hidden;
+    }
+
+    .hero {
+      padding: clamp(30px, 6vw, 72px);
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      right: -80px;
+      bottom: -100px;
+      background: linear-gradient(145deg, rgba(221,181,92,.22), rgba(229,141,116,.2));
+      filter: blur(2px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--teal-dark);
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: #e8f2ef;
+      padding: 8px 12px;
+      border-radius: 999px;
+    }
+
+    h1, h2, h3 { margin-top: 0; line-height: 1.08; }
+    h1 {
+      max-width: 760px;
+      margin: 22px 0 18px;
+      font-size: clamp(2.6rem, 7vw, 5.6rem);
+      letter-spacing: -.055em;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      font-size: clamp(1.05rem, 2.1vw, 1.28rem);
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 20px;
+      font-weight: 800;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      color: white;
+      background: var(--teal);
+      box-shadow: 0 10px 22px rgba(77,143,133,.22);
+    }
+    .btn-primary:hover { background: var(--teal-dark); }
+    .btn-secondary {
+      background: #efe9df;
+      color: var(--ink);
+    }
+    .btn-danger {
+      background: #fff0ec;
+      color: #a6533d;
+    }
+
+    .privacy-note {
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: .92rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hidden { display: none !important; }
+
+    .wizard {
+      margin-top: 18px;
+      padding: clamp(20px, 4vw, 42px);
+    }
+
+    .progress-wrap {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .progress-label, .progress-count {
+      color: var(--muted);
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .progress-track {
+      height: 10px;
+      background: #eee7dc;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 16.66%;
+      background: linear-gradient(90deg, var(--teal), var(--gold), var(--coral));
+      border-radius: inherit;
+      transition: width .35s ease;
+    }
+
+    .step {
+      animation: fadeUp .3s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -.035em;
+      margin-bottom: 10px;
+    }
+
+    .step-intro {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      max-width: 760px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .field, .full { display: grid; gap: 8px; }
+    .full { grid-column: 1 / -1; }
+
+    label {
+      font-weight: 800;
+      font-size: .95rem;
+    }
+
+    .hint {
+      font-size: .86rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 16px;
+      padding: 14px 15px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color .18s ease, box-shadow .18s ease;
+    }
+
+    textarea { min-height: 110px; resize: vertical; }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(77,143,133,.12);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .choice-card {
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 18px;
+      padding: 18px;
+      text-align: left;
+      color: var(--ink);
+      min-height: 104px;
+      position: relative;
+    }
+
+    .choice-card strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1rem;
+    }
+
+    .choice-card span {
+      color: var(--muted);
+      font-size: .88rem;
+      line-height: 1.4;
+    }
+
+    .choice-card.selected {
+      border-color: var(--teal);
+      background: #edf6f3;
+      box-shadow: inset 0 0 0 2px rgba(77,143,133,.16);
+    }
+
+    .choice-card.selected::after {
+      content: "✓";
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      color: var(--teal-dark);
+      font-weight: 900;
+    }
+
+    .slider-box {
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      background: #fbf7f0;
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    input[type="range"] {
+      padding: 0;
+      accent-color: var(--teal);
+      border: 0;
+      box-shadow: none;
+      background: transparent;
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: .84rem;
+      color: var(--muted);
+    }
+
+    .check-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+    }
+
+    .check-item input {
+      width: 20px;
+      height: 20px;
+      margin-top: 1px;
+      accent-color: var(--teal);
+    }
+
+    .nav-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 32px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .micro-copy {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: .88rem;
+      text-align: center;
+    }
+
+    .summary {
+      margin-top: 18px;
+    }
+
+    .summary-cover {
+      padding: clamp(30px, 6vw, 66px);
+      background:
+        linear-gradient(140deg, rgba(77,143,133,.95), rgba(53,110,103,.96)),
+        var(--teal);
+      color: white;
+    }
+
+    .summary-cover .eyebrow {
+      background: rgba(255,255,255,.16);
+      color: white;
+    }
+
+    .summary-cover h2 {
+      margin: 18px 0 8px;
+      font-size: clamp(2.3rem, 5vw, 4.4rem);
+      letter-spacing: -.045em;
+    }
+
+    .summary-cover p {
+      max-width: 700px;
+      margin: 0;
+      opacity: .88;
+      font-size: 1.05rem;
+    }
+
+    .summary-body {
+      padding: clamp(24px, 5vw, 52px);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 18px;
+    }
+
+    .summary-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      background: white;
+      break-inside: avoid;
+    }
+
+    .summary-card h3 {
+      font-size: 1.04rem;
+      margin-bottom: 12px;
+      color: var(--teal-dark);
+    }
+
+    .summary-card p, .summary-card li {
+      color: #4c5d58;
+      line-height: 1.55;
+    }
+
+    .summary-card p:last-child { margin-bottom: 0; }
+    .summary-card ul { padding-left: 20px; margin-bottom: 0; }
+
+    .summary-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 24px;
+      margin-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background: var(--ink);
+      color: white;
+      padding: 12px 16px;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: .25s ease;
+      z-index: 20;
+    }
+
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 760px) {
+      .field-grid, .summary-grid { grid-template-columns: 1fr; }
+      .card-grid { grid-template-columns: 1fr; }
+      .check-list { grid-template-columns: 1fr; }
+      .topbar { align-items: flex-start; }
+      .topbar-actions { align-items: flex-end; flex-direction: column-reverse; }
+      .save-state { text-align: right; }
+      .hero { padding: 28px 22px 38px; }
+      .wizard { padding: 22px 18px; }
+      .progress-label { display: none; }
+      .progress-wrap { grid-template-columns: 1fr auto; }
+      .nav-row .btn { flex: 1; }
+    }
+
+    @media print {
+      body { background: white; }
+      .topbar, .hero, .wizard, .summary-actions, .toast { display: none !important; }
+      .app-shell { width: 100%; margin: 0; }
+      .summary { display: block !important; box-shadow: none; border: 0; }
+      .summary-cover { border-radius: 0; }
+      .summary-body { padding: 28px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">✦</div>
+        <div>My Last Word</div>
+      </div>
+      <div class="topbar-actions">
+        <button class="home-btn" id="homeBtn" type="button" aria-label="Return to home">⌂ Home</button>
+        <div class="save-state" id="saveState">Saved only on this device</div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="hero">
+        <span class="eyebrow">A gentler way to plan ahead</span>
+        <h1>Your life. Your stories. Your send-off.</h1>
+        <p class="hero-copy">
+          Put together the celebration you would actually want — your music, your people, your rules.
+          It does not need to be gloomy, awkward or written entirely in legal-sounding sentences.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="startBtn">Start my plan</button>
+          <button class="btn btn-secondary" id="continueBtn">Continue saved plan</button>
+        </div>
+        <div class="privacy-note">
+          <span>🔒</span>
+          <span>This prototype keeps your answers in this browser only. No mysterious cloud. No man in a cupboard reading them.</span>
+        </div>
+      </section>
+
+      <section class="wizard hidden" id="wizard">
+        <div class="progress-wrap">
+          <div class="progress-label">Your plan</div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-count" id="progressCount">1 of 6</div>
+        </div>
+
+        <form id="plannerForm">
+          <section class="step" data-step="1">
+            <h2>Let’s start with you</h2>
+            <p class="step-intro">
+              Nothing too dramatic yet. We are simply giving your future send-off a name and a little personality.
+            </p>
+
+            <div class="field-grid">
+              <div class="field">
+                <label for="name">Your name</label>
+                <input id="name" name="name" placeholder="For example, Alex" />
+              </div>
+
+              <div class="field">
+                <label for="occasionName">What should the occasion be called?</label>
+                <select id="occasionName" name="occasionName">
+                  <option value="">Choose one</option>
+                  <option>Celebration of life</option>
+                  <option>Funeral</option>
+                  <option>Farewell gathering</option>
+                  <option>Memorial</option>
+                  <option>One last party</option>
+                  <option>Something else entirely</option>
+                </select>
+              </div>
+
+              <div class="field full">
+                <label for="customTitle">Give your plan a title <span class="hint">(optional)</span></label>
+                <input id="customTitle" name="customTitle" placeholder="Alex's Final Encore, One Last Party, The Big Send-Off..." />
+              </div>
+
+              <div class="field full">
+                <label for="openingMessage">A message to the people reading this</label>
+                <textarea id="openingMessage" name="openingMessage" placeholder="Keep it warm, keep it funny, and please use a photo where I actually look decent."></textarea>
+              </div>
+            </div>
+          </section>
+
+          <section class="step hidden" data-step="2">
+            <h2>Set the mood</h2>
+            <p class="step-intro">
+              How should the day feel? Pick the option that sounds most like you. There is no prize for choosing the most dignified one.
+            </p>
+
+            <div class="card-grid single-choice" data-field="mood">
+              <button type="button" class="choice-card" data-value="Warm and uplifting">
+                <strong>Warm and uplifting</strong>
+                <span>Meaningful, positive and full of love.</span>
+              </button>
+              <button type="button" class="choice-card" data-value="Funny and full of stories">
+                <strong>Funny and full of stories</strong>
+                <span>The good memories, the embarrassing ones and all the bits in between.</span>
+              </button>
+              <button type="button" class="choice-card" data-value="Calm and reflective">
+                <strong>Calm and reflective</strong>
+                <span>Gentle, peaceful and quietly personal.</span>
+              </button>
+              <button type="button" class="choice-card" data-value="Colourful and joyful">
+                <strong>Colourful and joyful</strong>
+                <span>More celebration, less sea of black coats.</span>
+              </button>
+              <button type="button" class="choice-card" data-value="Traditional and respectful">
+                <strong>Traditional and respectful</strong>
+                <span>Classic, thoughtful and beautifully done.</span>
+              </button>
+              <button type="button" class="choice-card" data-value="A bit of everything">
+                <strong>A bit of everything</strong>
+                <span>A few tears, a few laughs and hopefully some decent food.</span>
+              </button>
+            </div>
+            <input type="hidden" id="mood" name="mood" />
+
+            <div class="slider-box">
+              <label for="partyLevel">How lively should it be?</label>
+              <input type="range" id="partyLevel" name="partyLevel" min="1" max="5" value="3" />
+              <div class="slider-labels">
+                <span>Quiet reflection</span>
+                <span>One last legendary party</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="step hidden" data-step="3">
+            <h2>Choose the soundtrack</h2>
+            <p class="step-intro">
+              Music can say what people sometimes cannot. It can also stop somebody choosing a song you have hated for forty years.
+            </p>
+
+            <div class="field-grid">
+              <div class="field">
+                <label for="entranceSong">Entrance song</label>
+                <input id="entranceSong" name="entranceSong" placeholder="Artist — Song" />
+              </div>
+
+              <div class="field">
+                <label for="reflectionSong">Reflection song</label>
+                <input id="reflectionSong" name="reflectionSong" placeholder="Artist — Song" />
+              </div>
+
+              <div class="field">
+                <label for="leavingSong">Leaving song</label>
+                <input id="leavingSong" name="leavingSong" placeholder="Artist — Song" />
+              </div>
+
+              <div class="field">
+                <label for="wakeMusic">Wake or party playlist vibe</label>
+                <input id="wakeMusic" name="wakeMusic" placeholder="Soul classics, 90s dance, rock anthems..." />
+              </div>
+
+              <div class="field full">
+                <label for="bannedSong">The “over my dead body” song</label>
+                <span class="hint">What should never be played, even if someone insists it is “fitting”?</span>
+                <input id="bannedSong" name="bannedSong" placeholder="That one song. You know the one." />
+              </div>
+            </div>
+          </section>
+
+          <section class="step hidden" data-step="4">
+            <h2>Add the personal touches</h2>
+            <p class="step-intro">
+              This is the bit that makes it yours — the clothes, colours, photos, stories and whether people leave hungry afterwards.
+            </p>
+
+            <div class="field-grid">
+              <div class="field">
+                <label for="dressCode">Dress code</label>
+                <select id="dressCode" name="dressCode">
+                  <option value="">Choose one</option>
+                  <option>Traditional black</option>
+                  <option>Bright colours</option>
+                  <option>Smart but relaxed</option>
+                  <option>Football shirts</option>
+                  <option>Wear something that reminds you of me</option>
+                  <option>No dress code — just turn up</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="colourTheme">Favourite colours or theme</label>
+                <input id="colourTheme" name="colourTheme" placeholder="Teal and gold, Liverpool red, wildflowers..." />
+              </div>
+
+              <div class="field">
+                <label for="flowers">Flowers, donations or both?</label>
+                <input id="flowers" name="flowers" placeholder="Wildflowers, charity donations, both..." />
+              </div>
+
+              <div class="field">
+                <label for="foodDrink">Food and drink afterwards</label>
+                <input id="foodDrink" name="foodDrink" placeholder="Buffet, curry, tea and cake, open bar..." />
+              </div>
+
+              <div class="field full">
+                <label for="photoNotes">Photos and videos</label>
+                <textarea id="photoNotes" name="photoNotes" placeholder="Use the holiday photos, include the old band footage, and avoid that passport photo at all costs."></textarea>
+              </div>
+
+              <div class="field full">
+                <label for="story">A story or memory that should be shared</label>
+                <textarea id="story" name="story" placeholder="A favourite adventure, a running joke, a moment that sums you up..."></textarea>
+              </div>
+
+              <div class="field full">
+                <label for="people">People you would like involved</label>
+                <textarea id="people" name="people" placeholder="Who should speak, read something, help with music or keep everybody organised?"></textarea>
+              </div>
+            </div>
+          </section>
+
+          <section class="step hidden" data-step="5">
+            <h2>Your send-off. Your rules.</h2>
+            <p class="step-intro">
+              Select anything that matters to you. Future organisers will thank you. Quietly. Possibly through gritted teeth.
+            </p>
+
+            <div class="check-list" id="rulesList">
+              <label class="check-item"><input type="checkbox" name="rules" value="No overly long speeches" /><span>No overly long speeches</span></label>
+              <label class="check-item"><input type="checkbox" name="rules" value="Make people laugh" /><span>Make people laugh</span></label>
+              <label class="check-item"><input type="checkbox" name="rules" value="No forced sadness" /><span>No forced sadness</span></label>
+              <label class="check-item"><input type="checkbox" name="rules" value="Serve proper food" /><span>Serve proper food</span></label>
+              <label class="check-item"><input type="checkbox" name="rules" value="Nobody wears black" /><span>Nobody wears black</span></label>
+              <label class="check-item"><input type="checkbox" name="rules" value="Keep it small and personal" /><span>Keep it small and personal</span></label>
+              <label class="check-item"><input type="checkbox" name="rules" value="Make it a huge celebration" /><span>Make it a huge celebration</span></label>
+              <label class="check-item"><input type="checkbox" name="rules" value="Do not use a photo I hate" /><span>Do not use a photo I hate</span></label>
+              <label class="check-item"><input type="checkbox" name="rules" value="No religious content" /><span>No religious content</span></label>
+              <label class="check-item"><input type="checkbox" name="rules" value="Keep religious traditions" /><span>Keep religious traditions</span></label>
+            </div>
+
+            <div class="field" style="margin-top:20px;">
+              <label for="customRules">Anything else that is non-negotiable?</label>
+              <textarea id="customRules" name="customRules" placeholder="No carnations. Somebody bring decent speakers. Please do not let Uncle Dave take over the microphone."></textarea>
+            </div>
+          </section>
+
+          <section class="step hidden" data-step="6">
+            <h2>One last thing</h2>
+            <p class="step-intro">
+              Leave a final message, a thank-you or the last word you always knew you deserved.
+            </p>
+
+            <div class="field-grid">
+              <div class="field full">
+                <label for="finalMessage">Your final message</label>
+                <textarea id="finalMessage" name="finalMessage" style="min-height:170px;" placeholder="Thank you for being part of my life. Look after each other, tell the good stories, and do not spend the whole day whispering."></textarea>
+              </div>
+
+              <div class="field full">
+                <label for="organiserNotes">Private practical notes <span class="hint">(optional)</span></label>
+                <textarea id="organiserNotes" name="organiserNotes" placeholder="Important contacts, where documents are kept, or anything the organiser should know."></textarea>
+              </div>
+            </div>
+          </section>
+
+          <div class="nav-row">
+            <button type="button" class="btn btn-secondary" id="backBtn">Back</button>
+            <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
+          </div>
+          <div class="micro-copy" id="microCopy">Take your time. There are no wrong answers here.</div>
+        </form>
+      </section>
+
+      <section class="summary hidden" id="summary">
+        <div class="summary-cover">
+          <span class="eyebrow">Your send-off plan</span>
+          <h2 id="summaryTitle">My Last Word</h2>
+          <p id="summarySubtitle">A celebration shaped by the person who knows you best: you.</p>
+        </div>
+
+        <div class="summary-body">
+          <div class="summary-grid" id="summaryGrid"></div>
+
+          <div class="summary-actions">
+            <button class="btn btn-primary" id="printBtn">Print or save as PDF</button>
+            <button class="btn btn-secondary" id="editBtn">Edit my plan</button>
+            <button class="btn btn-danger" id="resetBtn">Start again</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast">Saved</div>
+
+  <script>
+    const STORAGE_KEY = "myLastWordPrototype";
+    const hero = document.getElementById("hero");
+    const wizard = document.getElementById("wizard");
+    const summary = document.getElementById("summary");
+    const form = document.getElementById("plannerForm");
+    const steps = [...document.querySelectorAll(".step")];
+    const progressFill = document.getElementById("progressFill");
+    const progressCount = document.getElementById("progressCount");
+    const nextBtn = document.getElementById("nextBtn");
+    const backBtn = document.getElementById("backBtn");
+    const saveState = document.getElementById("saveState");
+    const toast = document.getElementById("toast");
+    const homeBtn = document.getElementById("homeBtn");
+
+    let currentStep = 1;
+
+    const microMessages = [
+      "Take your time. There are no wrong answers here.",
+      "A good send-off should sound like the person it belongs to.",
+      "Excellent. Future DJs have now been given fair warning.",
+      "The small details are often the bits people remember.",
+      "Clear instructions now can prevent chaos later. Especially microphone-related chaos.",
+      "That is the planning done. Nicely handled."
+    ];
+
+    function showToast(message = "Saved") {
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+
+    function getData() {
+      const data = {};
+      const fd = new FormData(form);
+
+      for (const [key, value] of fd.entries()) {
+        if (key === "rules") {
+          if (!data.rules) data.rules = [];
+          data.rules.push(value);
+        } else {
+          data[key] = value;
+        }
+      }
+
+      data.partyLevel = document.getElementById("partyLevel").value;
+      data.currentStep = currentStep;
+      return data;
+    }
+
+    function saveData(silent = true) {
+      const data = getData();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      saveState.textContent = "Progress saved on this device";
+      if (!silent) showToast("Progress saved");
+    }
+
+    function loadData() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return false;
+
+      try {
+        const data = JSON.parse(raw);
+
+        Object.entries(data).forEach(([key, value]) => {
+          if (key === "rules" && Array.isArray(value)) {
+            document.querySelectorAll('input[name="rules"]').forEach(cb => {
+              cb.checked = value.includes(cb.value);
+            });
+            return;
+          }
+
+          const el = form.elements[key];
+          if (el && typeof value !== "object") el.value = value;
+        });
+
+        if (data.mood) {
+          document.querySelectorAll('[data-field="mood"] .choice-card').forEach(card => {
+            card.classList.toggle("selected", card.dataset.value === data.mood);
+          });
+        }
+
+        currentStep = Number(data.currentStep || 1);
+        updateStep();
+        saveState.textContent = "Saved plan found";
+        return true;
+      } catch {
+        return false;
+      }
+    }
+
+    function clearFormForNewPlan() {
+      form.reset();
+      document.querySelectorAll(".choice-card").forEach(card => card.classList.remove("selected"));
+      document.getElementById("mood").value = "";
+      document.getElementById("partyLevel").value = "3";
+      currentStep = 1;
+    }
+
+    function showHome() {
+      hero.classList.remove("hidden");
+      wizard.classList.add("hidden");
+      summary.classList.add("hidden");
+      homeBtn.style.display = "none";
+
+      const hasSaved = Boolean(localStorage.getItem(STORAGE_KEY));
+      document.getElementById("continueBtn").style.display = hasSaved ? "inline-flex" : "none";
+      saveState.textContent = hasSaved ? "Saved plan found" : "Saved only on this device";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function startPlanner(useSaved = false) {
+      hero.classList.add("hidden");
+      summary.classList.add("hidden");
+      wizard.classList.remove("hidden");
+      homeBtn.style.display = "inline-flex";
+
+      if (!useSaved) {
+        clearFormForNewPlan();
+        saveState.textContent = "New plan — not saved yet";
+        updateStep(true);
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function updateStep(skipSave = false) {
+      steps.forEach(step => {
+        step.classList.toggle("hidden", Number(step.dataset.step) !== currentStep);
+      });
+
+      progressFill.style.width = `${(currentStep / steps.length) * 100}%`;
+      progressCount.textContent = `${currentStep} of ${steps.length}`;
+      backBtn.style.visibility = currentStep === 1 ? "hidden" : "visible";
+      nextBtn.textContent = currentStep === steps.length ? "Create my plan" : "Next";
+      document.getElementById("microCopy").textContent = microMessages[currentStep - 1];
+      if (!skipSave) saveData(true);
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function valueOrFallback(value, fallback = "Not added yet") {
+      return value && String(value).trim() ? escapeHtml(value) : `<em>${fallback}</em>`;
+    }
+
+    function makeCard(title, content) {
+      return `<article class="summary-card"><h3>${title}</h3>${content}</article>`;
+    }
+
+    function generateSummary() {
+      saveData(true);
+      const data = getData();
+      const name = data.name?.trim() || "My";
+      const title = data.customTitle?.trim() || `${name === "My" ? "My" : name + "'s"} Send-Off Plan`;
+
+      document.getElementById("summaryTitle").textContent = title;
+      document.getElementById("summarySubtitle").textContent =
+        data.openingMessage?.trim() || "A celebration shaped by the person who knows you best: you.";
+
+      const partyLabels = {
+        "1": "Quiet and reflective",
+        "2": "Mostly gentle",
+        "3": "A balanced mix",
+        "4": "Lively and uplifting",
+        "5": "One last legendary party"
+      };
+
+      const rules = data.rules?.length
+        ? `<ul>${data.rules.map(rule => `<li>${escapeHtml(rule)}</li>`).join("")}</ul>`
+        : "<p><em>No preset rules selected.</em></p>";
+
+      const cards = [
+        makeCard("The occasion", `
+          <p><strong>Called:</strong> ${valueOrFallback(data.occasionName)}</p>
+          <p><strong>Mood:</strong> ${valueOrFallback(data.mood)}</p>
+          <p><strong>Energy:</strong> ${partyLabels[data.partyLevel] || "A balanced mix"}</p>
+        `),
+        makeCard("The soundtrack", `
+          <p><strong>Entrance:</strong> ${valueOrFallback(data.entranceSong)}</p>
+          <p><strong>Reflection:</strong> ${valueOrFallback(data.reflectionSong)}</p>
+          <p><strong>Leaving:</strong> ${valueOrFallback(data.leavingSong)}</p>
+          <p><strong>Afterwards:</strong> ${valueOrFallback(data.wakeMusic)}</p>
+          <p><strong>Absolutely banned:</strong> ${valueOrFallback(data.bannedSong, "No musical enemies declared")}</p>
+        `),
+        makeCard("Look and feel", `
+          <p><strong>Dress code:</strong> ${valueOrFallback(data.dressCode)}</p>
+          <p><strong>Colours/theme:</strong> ${valueOrFallback(data.colourTheme)}</p>
+          <p><strong>Flowers/donations:</strong> ${valueOrFallback(data.flowers)}</p>
+        `),
+        makeCard("Food, photos and memories", `
+          <p><strong>Food and drink:</strong> ${valueOrFallback(data.foodDrink)}</p>
+          <p><strong>Photos/videos:</strong> ${valueOrFallback(data.photoNotes)}</p>
+          <p><strong>Story to share:</strong> ${valueOrFallback(data.story)}</p>
+        `),
+        makeCard("People involved", `<p>${valueOrFallback(data.people)}</p>`),
+        makeCard("The rules", `
+          ${rules}
+          ${data.customRules?.trim() ? `<p><strong>Also:</strong> ${escapeHtml(data.customRules)}</p>` : ""}
+        `),
+        makeCard("Final message", `<p>${valueOrFallback(data.finalMessage)}</p>`),
+        makeCard("Practical notes", `<p>${valueOrFallback(data.organiserNotes, "No private notes added")}</p>`)
+      ];
+
+      document.getElementById("summaryGrid").innerHTML = cards.join("");
+      wizard.classList.add("hidden");
+      hero.classList.add("hidden");
+      summary.classList.remove("hidden");
+      homeBtn.style.display = "inline-flex";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      showToast("Your plan is ready");
+    }
+
+    homeBtn.addEventListener("click", showHome);
+
+    document.getElementById("startBtn").addEventListener("click", () => startPlanner(false));
+    document.getElementById("continueBtn").addEventListener("click", () => {
+      const loaded = loadData();
+      startPlanner(loaded);
+    });
+
+    document.querySelectorAll(".single-choice .choice-card").forEach(card => {
+      card.addEventListener("click", () => {
+        const group = card.closest(".single-choice");
+        group.querySelectorAll(".choice-card").forEach(c => c.classList.remove("selected"));
+        card.classList.add("selected");
+        const field = group.dataset.field;
+        document.getElementById(field).value = card.dataset.value;
+        saveData(true);
+      });
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (currentStep < steps.length) {
+        currentStep++;
+        updateStep();
+        window.scrollTo({ top: wizard.offsetTop - 10, behavior: "smooth" });
+      } else {
+        generateSummary();
+      }
+    });
+
+    backBtn.addEventListener("click", () => {
+      if (currentStep > 1) {
+        currentStep--;
+        updateStep();
+        window.scrollTo({ top: wizard.offsetTop - 10, behavior: "smooth" });
+      }
+    });
+
+    form.addEventListener("input", () => {
+      saveData(true);
+    });
+
+    document.getElementById("printBtn").addEventListener("click", () => window.print());
+
+    document.getElementById("editBtn").addEventListener("click", () => {
+      summary.classList.add("hidden");
+      wizard.classList.remove("hidden");
+      currentStep = 1;
+      updateStep();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      const confirmed = confirm("Start again and remove the saved answers from this device?");
+      if (!confirmed) return;
+
+      localStorage.removeItem(STORAGE_KEY);
+      form.reset();
+      document.querySelectorAll(".choice-card").forEach(card => card.classList.remove("selected"));
+      document.getElementById("mood").value = "";
+      currentStep = 1;
+      summary.classList.add("hidden");
+      wizard.classList.add("hidden");
+      showHome();
+      showToast("Plan cleared");
+    });
+
+    const hasSaved = Boolean(localStorage.getItem(STORAGE_KEY));
+    document.getElementById("continueBtn").style.display = hasSaved ? "inline-flex" : "none";
+    saveState.textContent = hasSaved ? "Saved plan found" : "Saved only on this device";
+    hero.classList.remove("hidden");
+    wizard.classList.add("hidden");
+    summary.classList.add("hidden");
+  </script>
+</body>
+</html>
