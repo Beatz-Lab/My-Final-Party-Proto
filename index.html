@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Last Word — Send-Off Planner</title>
+  <title>My Final Party — Send-Off Planner</title>
   <style>
     :root {
-      --bg: #f8f4ec;
-      --panel: #fffdf8;
-      --ink: #243330;
-      --muted: #6f7f79;
-      --teal: #4d8f85;
-      --teal-dark: #356e67;
-      --coral: #e58d74;
-      --gold: #ddb55c;
-      --line: #e6dfd3;
-      --shadow: 0 16px 40px rgba(62, 78, 72, 0.12);
+      --bg: #eef8ff;
+      --panel: #ffffff;
+      --ink: #20313a;
+      --muted: #64777f;
+      --teal: #3e8ca8;
+      --teal-dark: #2f6f86;
+      --coral: #f0b84b;
+      --gold: #ffe8a8;
+      --line: #d9e9f1;
+      --shadow: 0 16px 40px rgba(37, 73, 91, 0.13);
       --radius: 22px;
     }
 
@@ -26,8 +26,9 @@
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 15% 15%, rgba(229,141,116,.13), transparent 28%),
-        radial-gradient(circle at 85% 20%, rgba(77,143,133,.12), transparent 30%),
+        radial-gradient(circle at 14% 14%, rgba(62,140,168,.16), transparent 30%),
+        radial-gradient(circle at 88% 18%, rgba(240,184,75,.18), transparent 30%),
+        radial-gradient(circle at 58% 92%, rgba(255,232,168,.22), transparent 34%),
         var(--bg);
       min-height: 100vh;
     }
@@ -118,7 +119,7 @@
       border-radius: 50%;
       right: -80px;
       bottom: -100px;
-      background: linear-gradient(145deg, rgba(221,181,92,.22), rgba(229,141,116,.2));
+      background: linear-gradient(145deg, rgba(255,232,168,.34), rgba(62,140,168,.16));
       filter: blur(2px);
     }
 
@@ -231,6 +232,54 @@
       transition: width .35s ease;
     }
 
+
+    .progress-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin: -12px 0 30px;
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .progress-steps span {
+      opacity: .58;
+      white-space: nowrap;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 6px 4px;
+      transition: background .2s ease, opacity .2s ease, transform .2s ease;
+      user-select: none;
+    }
+
+    .progress-steps span:hover,
+    .progress-steps span:focus-visible {
+      opacity: 1;
+      background: rgba(62, 140, 168, .11);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .progress-steps span.active {
+      opacity: 1;
+      color: var(--teal-dark);
+    }
+
+    .progress-steps span.done {
+      opacity: .9;
+      color: var(--teal);
+    }
+
+    @media (max-width: 760px) {
+      .progress-steps {
+        font-size: .68rem;
+        gap: 4px;
+        margin-top: -8px;
+      }
+    }
+
     .step {
       animation: fadeUp .3s ease;
     }
@@ -252,6 +301,34 @@
       line-height: 1.6;
       margin-bottom: 28px;
       max-width: 760px;
+    }
+
+
+
+    .gentle-note {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #f7fbfd;
+      padding: 14px 16px;
+      margin: -6px 0 22px;
+      color: #4c5d58;
+      line-height: 1.5;
+      font-size: .94rem;
+    }
+
+    .page-disclaimer {
+      margin-top: 24px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff8e6;
+      padding: 14px 16px;
+      color: #4c5d58;
+      line-height: 1.5;
+      font-size: .92rem;
+    }
+
+    .page-disclaimer strong {
+      color: var(--teal-dark);
     }
 
     .field-grid {
@@ -294,7 +371,7 @@
 
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 14px;
     }
 
@@ -353,12 +430,16 @@
     }
 
     .slider-labels {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      font-size: .84rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      font-size: .8rem;
       color: var(--muted);
+      text-align: center;
     }
+
+    .slider-labels span:first-child { text-align: left; }
+    .slider-labels span:last-child { text-align: right; }
 
     .check-list {
       display: grid;
@@ -381,6 +462,96 @@
       height: 20px;
       margin-top: 1px;
       accent-color: var(--teal);
+    }
+
+
+    .sound-section {
+      border: 1px solid var(--line);
+      background: #fbf8f3;
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+
+    .sound-section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .sound-section-head h3 {
+      margin: 0 0 4px;
+      font-size: 1.2rem;
+    }
+
+    .sound-section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .sound-items {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .sound-item {
+      display: grid;
+      grid-template-columns: 135px 1fr auto auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .sound-link {
+      grid-column: 2 / 5;
+    }
+
+    .search-sound-btn {
+      border: 0;
+      background: #eef8ff;
+      color: var(--teal-dark);
+      border: 1px solid var(--line);
+      height: 42px;
+      border-radius: 12px;
+      font-weight: 900;
+      padding: 0 12px;
+      white-space: nowrap;
+    }
+
+    .search-sound-btn:hover {
+      background: white;
+    }
+
+    .remove-sound-btn {
+      border: 0;
+      background: #fff0ec;
+      color: #a6533d;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      font-weight: 900;
+    }
+
+    .add-sound-btn {
+      padding: 10px 14px;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 760px) {
+      .sound-item {
+        grid-template-columns: 1fr;
+      }
+
+      .sound-link {
+        grid-column: auto;
+      }
+
+      .search-sound-btn,
+      .remove-sound-btn {
+        width: 100%;
+      }
     }
 
     .nav-row {
@@ -461,6 +632,31 @@
     .summary-card p:last-child { margin-bottom: 0; }
     .summary-card ul { padding-left: 20px; margin-bottom: 0; }
 
+
+    .summary-note {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #f7fbfd;
+      padding: 18px 20px;
+      margin-top: 18px;
+    }
+
+    .summary-note h3 {
+      margin-bottom: 8px;
+      color: var(--teal-dark);
+      font-size: 1.04rem;
+    }
+
+    .summary-note p {
+      margin: 0;
+      color: #4c5d58;
+      line-height: 1.55;
+    }
+
+    .disclaimer-note {
+      background: #fff8e6;
+    }
+
     .summary-actions {
       display: flex;
       flex-wrap: wrap;
@@ -488,6 +684,254 @@
 
     .toast.show { opacity: 1; transform: translateY(0); }
 
+
+    .tone-picker {
+      margin-top: 18px;
+      padding: clamp(24px, 5vw, 48px);
+      background: rgba(255,253,248,.96);
+      border: 1px solid rgba(255,255,255,.7);
+      box-shadow: var(--shadow);
+      border-radius: 30px;
+    }
+
+    .tone-picker h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      letter-spacing: -.04em;
+      margin-bottom: 10px;
+    }
+
+    .tone-picker-copy {
+      color: var(--muted);
+      font-size: 1.04rem;
+      line-height: 1.6;
+      max-width: 760px;
+      margin-bottom: 26px;
+    }
+
+    .tone-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .tone-card {
+      border: 2px solid transparent;
+      border-radius: 22px;
+      padding: 22px;
+      text-align: left;
+      min-height: 220px;
+      position: relative;
+      overflow: hidden;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      color: #243330;
+    }
+
+    .tone-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px rgba(38,48,45,.14);
+    }
+
+    .tone-card .tone-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      font-size: 1.35rem;
+      margin-bottom: 18px;
+      background: rgba(255,255,255,.76);
+    }
+
+    .tone-card strong {
+      display: block;
+      font-size: 1.35rem;
+      margin-bottom: 8px;
+    }
+
+    .tone-card p {
+      margin: 0;
+      color: #55625f;
+      line-height: 1.55;
+    }
+
+    .tone-card small {
+      display: block;
+      margin-top: 16px;
+      font-weight: 800;
+      opacity: .74;
+    }
+
+    .tone-card.classic {
+      background: linear-gradient(145deg, #f5f7f9, #e8edf1);
+      border-color: #d7dfe5;
+    }
+
+    .tone-card.warm {
+      background: linear-gradient(145deg, #edf7f3, #f9e8e2);
+      border-color: #c9ddd6;
+    }
+
+    .tone-card.myway {
+      background: linear-gradient(145deg, #eee1fa, #ffe0cf);
+      border-color: #d6bae7;
+    }
+
+    .tone-card.partystyle {
+      background: linear-gradient(145deg, #ffd86f, #ff91b4 48%, #9d7cff);
+      border-color: #d278c9;
+      color: #33213d;
+    }
+
+    .tone-card.partystyle p { color: #493650; }
+
+    body[data-tone="classic"] {
+      --bg: #f3f9fd;
+      --panel: #ffffff;
+      --ink: #20313a;
+      --muted: #657984;
+      --teal: #4f7f96;
+      --teal-dark: #385f73;
+      --coral: #d8b25f;
+      --gold: #f4e5b6;
+      --line: #d9e9f1;
+    }
+
+    body[data-tone="warm"] {
+      --bg: #eef8ff;
+      --panel: #ffffff;
+      --ink: #20313a;
+      --muted: #64777f;
+      --teal: #3e8ca8;
+      --teal-dark: #2f6f86;
+      --coral: #f0b84b;
+      --gold: #ffe8a8;
+      --line: #d9e9f1;
+    }
+
+    body[data-tone="myway"] {
+      --bg: #edf6ff;
+      --panel: #ffffff;
+      --ink: #21313d;
+      --muted: #617782;
+      --teal: #2f8fb4;
+      --teal-dark: #246f8d;
+      --coral: #f0a94b;
+      --gold: #ffe39a;
+      --line: #cfe6f3;
+    }
+
+    body[data-tone="partystyle"] {
+      --bg: #eaf7ff;
+      --panel: #ffffff;
+      --ink: #19313f;
+      --muted: #5f7884;
+      --teal: #1f97c1;
+      --teal-dark: #15749a;
+      --coral: #f3b33f;
+      --gold: #ffd76d;
+      --line: #c9e7f5;
+    }
+
+    .tone-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-left: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: .75rem;
+      font-weight: 900;
+      background: rgba(255,255,255,.7);
+      color: var(--teal-dark);
+      border: 1px solid var(--line);
+      cursor: pointer;
+    }
+
+    .tone-badge:hover {
+      background: white;
+      transform: translateY(-1px);
+    }
+
+    .tone-switcher {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(26, 33, 31, .48);
+      backdrop-filter: blur(8px);
+      z-index: 50;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tone-switcher-card {
+      width: min(760px, 100%);
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      background: var(--panel);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+      border: 1px solid rgba(255,255,255,.7);
+    }
+
+    .tone-switcher-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .tone-switcher-head h3 {
+      margin-bottom: 6px;
+      font-size: 1.8rem;
+      letter-spacing: -.03em;
+    }
+
+    .tone-switcher-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .close-tone-switcher {
+      border: 0;
+      background: #efe9df;
+      color: var(--ink);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      font-weight: 900;
+    }
+
+    .tone-switcher .tone-card {
+      min-height: 170px;
+    }
+
+    @media (max-width: 760px) {
+      .tone-switcher {
+        place-items: start center;
+        padding: 14px;
+      }
+
+      .tone-switcher-card {
+        padding: 20px;
+        max-height: calc(100vh - 28px);
+        margin-bottom: 28px;
+      }
+
+      .tone-switcher .tone-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .tone-grid { grid-template-columns: 1fr; }
+      .tone-card { min-height: 0; }
+    }
+
     @media (max-width: 760px) {
       .field-grid, .summary-grid { grid-template-columns: 1fr; }
       .card-grid { grid-template-columns: 1fr; }
@@ -504,7 +948,7 @@
 
     @media print {
       body { background: white; }
-      .topbar, .hero, .wizard, .summary-actions, .toast { display: none !important; }
+      .topbar, .hero, .tone-picker, .wizard, .summary-actions, .toast { display: none !important; }
       .app-shell { width: 100%; margin: 0; }
       .summary { display: block !important; box-shadow: none; border: 0; }
       .summary-cover { border-radius: 0; }
@@ -518,7 +962,7 @@
     <header class="topbar">
       <div class="brand">
         <div class="brand-mark">✦</div>
-        <div>My Last Word</div>
+        <div>My Final Party <button type="button" class="tone-badge hidden" id="toneBadge" aria-label="Change tone"></button></div>
       </div>
       <div class="topbar-actions">
         <button class="home-btn" id="homeBtn" type="button" aria-label="Return to home">⌂ Home</button>
@@ -529,10 +973,10 @@
     <main>
       <section class="hero" id="hero">
         <span class="eyebrow">A gentler way to plan ahead</span>
-        <h1>Your life. Your stories. Your send-off.</h1>
+        <h1>Your life. Your stories. Your send-off. Your final party.</h1>
         <p class="hero-copy">
           Put together the celebration you would actually want — your music, your people, your rules.
-          It does not need to be gloomy, awkward or written entirely in legal-sounding sentences.
+          Let your loved ones know how you would like to say your final goodbye.
         </p>
         <div class="hero-actions">
           <button class="btn btn-primary" id="startBtn">Start my plan</button>
@@ -544,21 +988,67 @@
         </div>
       </section>
 
+
+      <section class="tone-picker hidden" id="tonePicker">
+        <span class="eyebrow">Choose your tone</span>
+        <h2>How would you like us to guide you?</h2>
+        <p class="tone-picker-copy">
+          Every version asks the same questions. Only the wording and atmosphere change.
+          Pick the one that feels most comfortable — you can change it later without losing any answers.
+        </p>
+
+        <div class="tone-grid">
+          <button type="button" class="tone-card classic" data-tone-choice="classic">
+            <span class="tone-icon">▤</span>
+            <strong>Classic</strong>
+            <p>Clear, professional and respectful. Straightforward wording with no jokes or playful comments.</p>
+            <small>Thoughtful and to the point</small>
+          </button>
+
+          <button type="button" class="tone-card warm" data-tone-choice="warm">
+            <span class="tone-icon">♡</span>
+            <strong>Warm</strong>
+            <p>Friendly, reassuring and light-hearted, while keeping everything respectful.</p>
+            <small>Soft, personal and uplifting</small>
+          </button>
+
+          <button type="button" class="tone-card myway" data-tone-choice="myway">
+            <span class="tone-icon">✦</span>
+            <strong>My Way</strong>
+            <p>Relaxed, honest and more likely to make you smile as you work through the questions.</p>
+            <small>Less doom, more you</small>
+          </button>
+
+          <button type="button" class="tone-card partystyle" data-tone-choice="partystyle">
+            <span class="tone-icon">★</span>
+            <strong>Party Style</strong>
+            <p>Bright, upbeat and full of personality, with wording designed to make the planning feel more like a celebration.</p>
+            <small>Bold, cheerful and unmistakably you</small>
+          </button>
+        </div>
+      </section>
+
       <section class="wizard hidden" id="wizard">
         <div class="progress-wrap">
           <div class="progress-label">Your plan</div>
           <div class="progress-track">
             <div class="progress-fill" id="progressFill"></div>
           </div>
-          <div class="progress-count" id="progressCount">1 of 6</div>
+          <div class="progress-count" id="progressCount">1 of 5</div>
+        </div>
+
+        <div class="progress-steps" id="progressSteps" aria-label="Planner sections">
+          <span data-progress-step="1" role="button" tabindex="0">Basics</span>
+          <span data-progress-step="2" role="button" tabindex="0">Details</span>
+          <span data-progress-step="3" role="button" tabindex="0">Sound</span>
+          <span data-progress-step="4" role="button" tabindex="0">Wishes</span>
+          <span data-progress-step="5" role="button" tabindex="0">Final messages</span>
         </div>
 
         <form id="plannerForm">
           <section class="step" data-step="1">
-            <h2>Let’s start with you</h2>
-            <p class="step-intro">
-              Nothing too dramatic yet. We are simply giving your future send-off a name and a little personality.
-            </p>
+            <h2 id="step1Title">Let’s start with you</h2>
+            <p class="step-intro" id="step1Intro">Nothing too dramatic yet. Start with your name and a few simple questions to create the send-off that feels like you.</p>
 
             <div class="field-grid">
               <div class="field">
@@ -570,113 +1060,42 @@
                 <label for="occasionName">What should the occasion be called?</label>
                 <select id="occasionName" name="occasionName">
                   <option value="">Choose one</option>
-                  <option>Celebration of life</option>
-                  <option>Funeral</option>
-                  <option>Farewell gathering</option>
-                  <option>Memorial</option>
-                  <option>One last party</option>
-                  <option>Something else entirely</option>
+                  <option value="celebration">Celebration of life</option>
+                  <option value="funeral">Funeral</option>
+                  <option value="farewell">Farewell gathering</option>
+                  <option value="memorial">Memorial</option>
+                  <option value="party">One last party</option>
+                  <option value="custom">Something else entirely</option>
                 </select>
               </div>
 
-              <div class="field full">
-                <label for="customTitle">Give your plan a title <span class="hint">(optional)</span></label>
+              <div class="field full hidden" id="customTitleField">
+                <label for="customTitle">Give your plan a title</label>
                 <input id="customTitle" name="customTitle" placeholder="Alex's Final Encore, One Last Party, The Big Send-Off..." />
               </div>
+            </div>
 
-              <div class="field full">
-                <label for="openingMessage">A message to the people reading this</label>
-                <textarea id="openingMessage" name="openingMessage" placeholder="Keep it warm, keep it funny, and please use a photo where I actually look decent."></textarea>
-              </div>
+            <div class="page-disclaimer">
+              <strong>Small but important note:</strong>
+              This plan is a guide to personal wishes. It is not a legal will or a legally binding funeral instruction.
             </div>
           </section>
 
           <section class="step hidden" data-step="2">
-            <h2>Set the mood</h2>
-            <p class="step-intro">
-              How should the day feel? Pick the option that sounds most like you. There is no prize for choosing the most dignified one.
-            </p>
-
-            <div class="card-grid single-choice" data-field="mood">
-              <button type="button" class="choice-card" data-value="Warm and uplifting">
-                <strong>Warm and uplifting</strong>
-                <span>Meaningful, positive and full of love.</span>
-              </button>
-              <button type="button" class="choice-card" data-value="Funny and full of stories">
-                <strong>Funny and full of stories</strong>
-                <span>The good memories, the embarrassing ones and all the bits in between.</span>
-              </button>
-              <button type="button" class="choice-card" data-value="Calm and reflective">
-                <strong>Calm and reflective</strong>
-                <span>Gentle, peaceful and quietly personal.</span>
-              </button>
-              <button type="button" class="choice-card" data-value="Colourful and joyful">
-                <strong>Colourful and joyful</strong>
-                <span>More celebration, less sea of black coats.</span>
-              </button>
-              <button type="button" class="choice-card" data-value="Traditional and respectful">
-                <strong>Traditional and respectful</strong>
-                <span>Classic, thoughtful and beautifully done.</span>
-              </button>
-              <button type="button" class="choice-card" data-value="A bit of everything">
-                <strong>A bit of everything</strong>
-                <span>A few tears, a few laughs and hopefully some decent food.</span>
-              </button>
-            </div>
-            <input type="hidden" id="mood" name="mood" />
-
-            <div class="slider-box">
-              <label for="partyLevel">How lively should it be?</label>
-              <input type="range" id="partyLevel" name="partyLevel" min="1" max="5" value="3" />
-              <div class="slider-labels">
-                <span>Quiet reflection</span>
-                <span>One last legendary party</span>
-              </div>
-            </div>
-          </section>
-
-          <section class="step hidden" data-step="3">
-            <h2>Choose the soundtrack</h2>
-            <p class="step-intro">
-              Music can say what people sometimes cannot. It can also stop somebody choosing a song you have hated for forty years.
-            </p>
+            <h2 id="step2Title">Add the personal touches</h2>
+            <p class="step-intro" id="step2Intro">This is the bit that makes it yours — the clothes, colours, photos, stories and whether people leave hungry afterwards.</p>
 
             <div class="field-grid">
-              <div class="field">
-                <label for="entranceSong">Entrance song</label>
-                <input id="entranceSong" name="entranceSong" placeholder="Artist — Song" />
-              </div>
-
-              <div class="field">
-                <label for="reflectionSong">Reflection song</label>
-                <input id="reflectionSong" name="reflectionSong" placeholder="Artist — Song" />
-              </div>
-
-              <div class="field">
-                <label for="leavingSong">Leaving song</label>
-                <input id="leavingSong" name="leavingSong" placeholder="Artist — Song" />
-              </div>
-
-              <div class="field">
-                <label for="wakeMusic">Wake or party playlist vibe</label>
-                <input id="wakeMusic" name="wakeMusic" placeholder="Soul classics, 90s dance, rock anthems..." />
+              <div class="field full">
+                <label for="ceremonyLocation" id="ceremonyLocationLabel">Preferred ceremony location</label>
+                <input id="ceremonyLocation" name="ceremonyLocation" placeholder="Funeral home, crematorium, church, favourite place, or location notes..." />
               </div>
 
               <div class="field full">
-                <label for="bannedSong">The “over my dead body” song</label>
-                <span class="hint">What should never be played, even if someone insists it is “fitting”?</span>
-                <input id="bannedSong" name="bannedSong" placeholder="That one song. You know the one." />
+                <label for="afterwardsLocation" id="afterwardsLocationLabel">Preferred afterwards location</label>
+                <input id="afterwardsLocation" name="afterwardsLocation" placeholder="Pub, house, venue, restaurant, community hall, or anywhere people should gather afterwards..." />
               </div>
-            </div>
-          </section>
 
-          <section class="step hidden" data-step="4">
-            <h2>Add the personal touches</h2>
-            <p class="step-intro">
-              This is the bit that makes it yours — the clothes, colours, photos, stories and whether people leave hungry afterwards.
-            </p>
-
-            <div class="field-grid">
               <div class="field">
                 <label for="dressCode">Dress code</label>
                 <select id="dressCode" name="dressCode">
@@ -687,17 +1106,39 @@
                   <option>Football shirts</option>
                   <option>Wear something that reminds you of me</option>
                   <option>No dress code — just turn up</option>
+                  <option value="custom">Something else</option>
                 </select>
+              </div>
+
+              <div class="field hidden" id="customDressCodeField">
+                <label for="customDressCode">Custom dress code</label>
+                <input id="customDressCode" name="customDressCode" placeholder="Add the dress code you would like..." />
               </div>
 
               <div class="field">
                 <label for="colourTheme">Favourite colours or theme</label>
-                <input id="colourTheme" name="colourTheme" placeholder="Teal and gold, Liverpool red, wildflowers..." />
+                <input id="colourTheme" name="colourTheme" placeholder="Teal and gold, Liverpool red, soft pastels..." />
               </div>
 
               <div class="field">
-                <label for="flowers">Flowers, donations or both?</label>
-                <input id="flowers" name="flowers" placeholder="Wildflowers, charity donations, both..." />
+                <label for="flowers">Flowers, donations, both or neither?</label>
+                <select id="flowers" name="flowers">
+                  <option value="">Choose one</option>
+                  <option>Flowers</option>
+                  <option>Donations</option>
+                  <option>Both</option>
+                  <option>Neither</option>
+                </select>
+              </div>
+
+              <div class="field hidden" id="flowerDetailsField">
+                <label for="flowerDetails">Flower preferences</label>
+                <input id="flowerDetails" name="flowerDetails" placeholder="Favourite flowers, colours, arrangement style, or anything to avoid..." />
+              </div>
+
+              <div class="field hidden" id="charityDetailsField">
+                <label for="charityDetails">Charity or donation details</label>
+                <input id="charityDetails" name="charityDetails" placeholder="Charity name, cause, donation link, or any notes..." />
               </div>
 
               <div class="field">
@@ -706,7 +1147,7 @@
               </div>
 
               <div class="field full">
-                <label for="photoNotes">Photos and videos</label>
+                <label for="photoNotes" id="photoNotesLabel">Photos and videos</label>
                 <textarea id="photoNotes" name="photoNotes" placeholder="Use the holiday photos, include the old band footage, and avoid that passport photo at all costs."></textarea>
               </div>
 
@@ -722,11 +1163,65 @@
             </div>
           </section>
 
-          <section class="step hidden" data-step="5">
-            <h2>Your send-off. Your rules.</h2>
-            <p class="step-intro">
-              Select anything that matters to you. Future organisers will thank you. Quietly. Possibly through gritted teeth.
-            </p>
+          <section class="step hidden" data-step="3">
+            <h2 id="step3Title">How will it sound?</h2>
+            <p class="step-intro" id="step3Intro">Music can say what people sometimes cannot.</p>
+            <p class="hint" style="margin-top:-14px; margin-bottom:22px;">Use the search button to find a version, then paste the exact link if there is one you prefer.</p>
+
+            <div class="sound-section" data-sound-section="entrance">
+              <div class="sound-section-head">
+                <div>
+                  <h3>Entrance</h3>
+                  <p>What would you like people to hear as the occasion begins?</p>
+                </div>
+              </div>
+              <div class="sound-items" id="entranceItems"></div>
+              <button type="button" class="btn btn-secondary add-sound-btn" data-add-sound="entrance">＋ Add another</button>
+            </div>
+
+            <div class="sound-section" data-sound-section="reflection">
+              <div class="sound-section-head">
+                <div>
+                  <h3>Reflection</h3>
+                  <p>Something meaningful for a quieter moment.</p>
+                </div>
+              </div>
+              <div class="sound-items" id="reflectionItems"></div>
+              <button type="button" class="btn btn-secondary add-sound-btn" data-add-sound="reflection">＋ Add another</button>
+            </div>
+
+            <div class="sound-section" data-sound-section="leaving">
+              <div class="sound-section-head">
+                <div>
+                  <h3>Leaving</h3>
+                  <p>What should play or be read as people say goodbye?</p>
+                </div>
+              </div>
+              <div class="sound-items" id="leavingItems"></div>
+              <button type="button" class="btn btn-secondary add-sound-btn" data-add-sound="leaving">＋ Add another</button>
+            </div>
+
+            <div class="sound-section" data-sound-section="afterwards">
+              <div class="sound-section-head">
+                <div>
+                  <h3>Afterwards</h3>
+                  <p>Music, readings or words for the gathering afterwards.</p>
+                </div>
+              </div>
+              <div class="sound-items" id="afterwardsItems"></div>
+              <button type="button" class="btn btn-secondary add-sound-btn" data-add-sound="afterwards">＋ Add another</button>
+            </div>
+
+            <div class="field full" style="margin-top:24px;">
+              <label for="bannedSong" id="bannedSongLabel">The “over my dead body” song</label>
+              <span class="hint" id="bannedSongHint">What should never be played, even if someone insists it is “fitting”?</span>
+              <input id="bannedSong" name="bannedSong" placeholder="That one song. You know the one." />
+            </div>
+          </section>
+
+          <section class="step hidden" data-step="4">
+            <h2 id="step4Title">Your send-off. Your wishes.</h2>
+            <p class="step-intro" id="step4Intro">Select anything that matters to you. Future organisers will thank you. Quietly. Possibly through gritted teeth.</p>
 
             <div class="check-list" id="rulesList">
               <label class="check-item"><input type="checkbox" name="rules" value="No overly long speeches" /><span>No overly long speeches</span></label>
@@ -735,33 +1230,61 @@
               <label class="check-item"><input type="checkbox" name="rules" value="Serve proper food" /><span>Serve proper food</span></label>
               <label class="check-item"><input type="checkbox" name="rules" value="Nobody wears black" /><span>Nobody wears black</span></label>
               <label class="check-item"><input type="checkbox" name="rules" value="Keep it small and personal" /><span>Keep it small and personal</span></label>
-              <label class="check-item"><input type="checkbox" name="rules" value="Make it a huge celebration" /><span>Make it a huge celebration</span></label>
               <label class="check-item"><input type="checkbox" name="rules" value="Do not use a photo I hate" /><span>Do not use a photo I hate</span></label>
+              <label class="check-item"><input type="checkbox" name="rules" value="Make it a huge celebration" /><span>Make it a huge celebration</span></label>
               <label class="check-item"><input type="checkbox" name="rules" value="No religious content" /><span>No religious content</span></label>
               <label class="check-item"><input type="checkbox" name="rules" value="Keep religious traditions" /><span>Keep religious traditions</span></label>
             </div>
 
             <div class="field" style="margin-top:20px;">
-              <label for="customRules">Anything else that is non-negotiable?</label>
+              <label for="customRules" id="customRulesLabel">Anything else that is non-negotiable?</label>
               <textarea id="customRules" name="customRules" placeholder="No carnations. Somebody bring decent speakers. Please do not let Uncle Dave take over the microphone."></textarea>
             </div>
           </section>
 
-          <section class="step hidden" data-step="6">
-            <h2>One last thing</h2>
-            <p class="step-intro">
-              Leave a final message, a thank-you or the last word you always knew you deserved.
-            </p>
+          <section class="step hidden" data-step="5">
+            <h2 id="step5Title">One last thing</h2>
+            <p class="step-intro" id="step5Intro">Leave a final message, a thank-you or the last word you always knew you deserved.</p>
 
             <div class="field-grid">
               <div class="field full">
-                <label for="finalMessage">Your final message</label>
+                <label for="finalMessage" id="finalMessageLabel">Your final message</label>
                 <textarea id="finalMessage" name="finalMessage" style="min-height:170px;" placeholder="Thank you for being part of my life. Look after each other, tell the good stories, and do not spend the whole day whispering."></textarea>
               </div>
 
               <div class="field full">
+                <label id="personalMessagesLabel">Personal messages for loved ones</label>
+                <span class="hint" id="personalMessagesHint">Add private messages for specific people, if there is anything you would want them to directly hear from you.</span>
+                <div class="repeat-list" id="personalMessagesItems"></div>
+                <button class="btn btn-secondary mini" type="button" id="addPersonalMessageBtn">Add personal message</button>
+              </div>
+
+              <div class="field full">
+                <label for="usefulInfo" id="usefulInfoLabel">Useful things to know</label>
+                <span class="hint" id="usefulInfoHint">Add anything that would make life easier for the people sorting things out later.</span>
+                <textarea id="usefulInfo" name="usefulInfo" placeholder="Will location, funeral plan provider, life insurance details, solicitor, important contacts, phone PIN/passcode, or where key documents are kept."></textarea>
+              </div>
+
+              <div class="field full">
+                <label for="reviewReminder" id="reviewReminderLabel">Review reminder</label>
+                <span class="hint" id="reviewReminderHint">Life changes. It is worth checking this still feels right from time to time.</span>
+                <select id="reviewReminder" name="reviewReminder">
+                  <option value="">Choose one</option>
+                  <option>Review every 6 months</option>
+                  <option>Review once a year</option>
+                  <option value="specific">Pick a specific date</option>
+                  <option>No reminder needed</option>
+                </select>
+              </div>
+
+              <div class="field full hidden" id="reviewDateField">
+                <label for="reviewDate">Specific review date</label>
+                <input id="reviewDate" name="reviewDate" type="date" />
+              </div>
+
+              <div class="field full">
                 <label for="organiserNotes">Private practical notes <span class="hint">(optional)</span></label>
-                <textarea id="organiserNotes" name="organiserNotes" placeholder="Important contacts, where documents are kept, or anything the organiser should know."></textarea>
+                <textarea id="organiserNotes" name="organiserNotes" placeholder="Anything else the organiser should know."></textarea>
               </div>
             </div>
           </section>
@@ -777,12 +1300,17 @@
       <section class="summary hidden" id="summary">
         <div class="summary-cover">
           <span class="eyebrow">Your send-off plan</span>
-          <h2 id="summaryTitle">My Last Word</h2>
+          <h2 id="summaryTitle">My Final Party</h2>
           <p id="summarySubtitle">A celebration shaped by the person who knows you best: you.</p>
         </div>
 
         <div class="summary-body">
           <div class="summary-grid" id="summaryGrid"></div>
+
+          <div class="summary-note">
+            <h3>Save or share this plan</h3>
+            <p>This plan is only useful if someone knows it exists. Save a copy, print it, or share it with someone you trust.</p>
+          </div>
 
           <div class="summary-actions">
             <button class="btn btn-primary" id="printBtn">Print or save as PDF</button>
@@ -794,6 +1322,45 @@
     </main>
   </div>
 
+
+  <div class="tone-switcher hidden" id="toneSwitcher">
+    <div class="tone-switcher-card">
+      <div class="tone-switcher-head">
+        <div>
+          <h3>Change the tone</h3>
+          <p>Your answers will stay exactly as they are. Only the wording and colour scheme will change.</p>
+        </div>
+        <button type="button" class="close-tone-switcher" id="closeToneSwitcher" aria-label="Close">×</button>
+      </div>
+
+      <div class="tone-grid">
+        <button type="button" class="tone-card classic" data-switch-tone="classic">
+          <span class="tone-icon">▤</span>
+          <strong>Classic</strong>
+          <p>Professional, respectful and straightforward.</p>
+        </button>
+
+        <button type="button" class="tone-card warm" data-switch-tone="warm">
+          <span class="tone-icon">♡</span>
+          <strong>Warm</strong>
+          <p>Friendly, reassuring and light-hearted.</p>
+        </button>
+
+        <button type="button" class="tone-card myway" data-switch-tone="myway">
+          <span class="tone-icon">✦</span>
+          <strong>My Way</strong>
+          <p>Relaxed, honest and more likely to make you smile.</p>
+        </button>
+
+        <button type="button" class="tone-card partystyle" data-switch-tone="partystyle">
+          <span class="tone-icon">★</span>
+          <strong>Party Style</strong>
+          <p>Bright, upbeat and full of celebratory personality.</p>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" id="toast">Saved</div>
 
   <script>
@@ -801,6 +1368,10 @@
     const hero = document.getElementById("hero");
     const wizard = document.getElementById("wizard");
     const summary = document.getElementById("summary");
+    const tonePicker = document.getElementById("tonePicker");
+    const toneBadge = document.getElementById("toneBadge");
+    const toneSwitcher = document.getElementById("toneSwitcher");
+    const closeToneSwitcher = document.getElementById("closeToneSwitcher");
     const form = document.getElementById("plannerForm");
     const steps = [...document.querySelectorAll(".step")];
     const progressFill = document.getElementById("progressFill");
@@ -812,6 +1383,7 @@
     const homeBtn = document.getElementById("homeBtn");
 
     let currentStep = 1;
+    let currentTone = "warm";
 
     const microMessages = [
       "Take your time. There are no wrong answers here.",
@@ -821,6 +1393,567 @@
       "Clear instructions now can prevent chaos later. Especially microphone-related chaos.",
       "That is the planning done. Nicely handled."
     ];
+
+
+    const toneContent = {
+      classic: {
+        label: "Classic",
+        micro: [
+          "Complete each section at your own pace.",
+          "Record the personal details that matter to {name}.",
+          "Add any music, hymns, poems or readings to include.",
+          "Add any specific preferences or instructions for {name}.",
+          "Review the final wishes before creating the plan."
+        ],
+        steps: [
+          ["Personal details", "Begin with {nameField} and a few simple questions to create the send-off that feels right."],
+          ["Personal preferences", "Add details relating to clothing, colours, photographs, memories, food and those involved in {possessive} occasion."],
+          ["How will it sound?", "Music can say what people sometimes cannot."],
+          ["Additional wishes", "Select any wishes that are important to {name} and add further details if required."],
+          ["Final message", "Leave a personal message from {name} for the people who may read this plan in the future."]
+        ],
+        bannedLabel: "Music to avoid",
+        bannedHint: "Add any song or type of music {name} would prefer not to be used.",
+        customRulesLabel: "Are there any other important instructions for {name}?",
+        placeholders: {
+          bannedSong: "Artist, song or type of music",
+          photoNotes: "Describe the photographs or videos {name} would like included or avoided.",
+          customRules: "Add any further instructions or preferences.",
+          finalMessage: "Write a personal message for family, friends or those arranging the occasion."
+        }
+      },
+      warm: {
+        label: "Warm",
+        micro: [
+          "Take your time. There are no wrong answers here.",
+          "The small details are often the bits people remember about {name}.",
+          "Music often says what people cannot.",
+          "Clear wishes can make things much easier for the people {name} loves.",
+          "That is the planning done. Nicely handled."
+        ],
+        steps: [
+          ["Let’s start with {name}", "Start with {nameField} and a few simple questions to create the send-off that feels like {name}."],
+          ["Add {possessive} personal touches", "The clothes, colours, photos, stories and food are what make the day feel truly personal to {name}."],
+          ["How will it sound?", "Music can say what people sometimes cannot."],
+          ["{possessiveCap} send-off. {possessiveCap} wishes.", "Choose anything that matters to {name} and add any details that would help the people arranging it."],
+          ["One last thing from {name}", "Leave a final message, a thank-you or a few words from the heart."]
+        ],
+        bannedLabel: "A song {name} would rather avoid",
+        bannedHint: "Is there anything that simply would not feel right for {name}?",
+        customRulesLabel: "Anything else that really matters to {name}?",
+        placeholders: {
+          bannedSong: "That one song they would rather not hear...",
+          photoNotes: "Use the happy photos, favourite memories and anything that feels like them.",
+          customRules: "Add any little details that would make the day feel right.",
+          finalMessage: "Thank you for being part of my life. Look after each other and remember the good times."
+        }
+      },
+      myway: {
+        label: "My Way",
+        micro: [
+          "No doom and gloom required. Let’s make this sound like {name}.",
+          "This is where we prevent bad photos and disappointing buffet decisions.",
+          "Time to give the future DJ some very clear instructions.",
+          "Clear rules now can prevent microphone chaos later.",
+          "Done. The last word is officially {possessive}."
+        ],
+        steps: [
+          ["Right then, let’s make it {possessive}", "Just {possessive} name and some simple questions to create the send-off that feels like {name}."],
+          ["The bits people will remember about {name}", "Clothes, colours, food, photos and stories — including strict instructions to avoid that one terrible picture."],
+          ["How will it sound?", "Music can say what people sometimes cannot."],
+          ["{possessiveCap} send-off. {possessiveCap} wishes.", "Future organisers will thank {name} for being clear. Eventually."],
+          ["One last thing from {name}", "Leave a message, a thank-you or the final word {name} always knew they deserved."]
+        ],
+        bannedLabel: "The “over my dead body” song",
+        bannedHint: "What should never be played, even if somebody claims it is “perfect” for {name}?",
+        customRulesLabel: "Anything else that is absolutely non-negotiable for {name}?",
+        placeholders: {
+          bannedSong: "That one song. You know the one.",
+          photoNotes: "Use the holiday photos, include the old videos, and destroy all evidence of the passport picture.",
+          customRules: "No carnations. Bring decent speakers. Do not let one person take over the microphone.",
+          finalMessage: "Tell the good stories, look after each other, and do not spend the whole day whispering."
+        }
+      },
+      partystyle: {
+        label: "Party Style",
+        micro: [
+          "Right — let’s build a goodbye that feels more like {possessive} celebration.",
+          "Photos, colours, food and stories — this is where {possessive} personality lives.",
+          "Time to give the future DJ some very clear instructions.",
+          "{possessiveCap} party, {possessive} wishes. Sensible shoes optional.",
+          "Finished. {name} has officially planned the most organised final party in the room."
+        ],
+        steps: [
+          ["Let’s get {possessive} party started", "Just {possessive} name and some simple questions to create the send-off that feels like {name}."],
+          ["Make it unmistakably {name}", "Pick the colours, outfits, food, photos and stories that will make people smile and say, “That is so {name}.”"],
+          ["How will it sound?", "Music can say what people sometimes cannot."],
+          ["{possessiveCap} final party. {possessiveCap} wishes.", "Be clear now so nobody serves disappointing sandwiches or gives a speech long enough to need an interval."],
+          ["{possessiveCap} final word", "Leave everyone with a message, a thank-you, or one last line they will remember with a smile."]
+        ],
+        bannedLabel: "The song that is absolutely not invited",
+        bannedHint: "Every party has a guest list. This song is not on {possessive} list.",
+        customRulesLabel: "Any other final-party wishes for {name}?",
+        placeholders: {
+          bannedSong: "Name and shame the banned song...",
+          photoNotes: "Use the brilliant photos. Hide the questionable haircuts. You know the ones.",
+          customRules: "Great food, great music, no endless speeches...",
+          finalMessage: "Raise a glass, tell the best stories and remember me with a smile."
+        }
+      }
+    };
+
+    function displayName() {
+      return (document.getElementById("name")?.value || "").trim() || "you";
+    }
+
+    function displayNameFieldText() {
+      const clean = (document.getElementById("name")?.value || "").trim();
+      return clean ? clean : "your name";
+    }
+
+    function possessiveDisplayName() {
+      const name = displayName();
+      if (name === "you") return "your";
+      return possessiveName(name);
+    }
+
+    function resolvePersonalText(text) {
+      const name = displayName();
+      const possessive = possessiveDisplayName();
+      const possessiveCap = possessive.charAt(0).toUpperCase() + possessive.slice(1);
+      return String(text)
+        .replaceAll("{nameField}", displayNameFieldText())
+        .replaceAll("{name}", name)
+        .replaceAll("{possessiveCap}", possessiveCap)
+        .replaceAll("{possessive}", possessive);
+    }
+
+    function applyTone(tone) {
+      currentTone = toneContent[tone] ? tone : "warm";
+      document.body.dataset.tone = currentTone;
+
+      const config = toneContent[currentTone];
+      toneBadge.textContent = `${config.label} · Change`;
+      toneBadge.classList.remove("hidden");
+
+      config.steps.forEach((step, index) => {
+        document.getElementById(`step${index + 1}Title`).textContent = resolvePersonalText(step[0]);
+        document.getElementById(`step${index + 1}Intro`).textContent = resolvePersonalText(step[1]);
+      });
+
+      document.getElementById("bannedSongLabel").textContent = resolvePersonalText(config.bannedLabel);
+      document.getElementById("bannedSongHint").textContent = resolvePersonalText(config.bannedHint);
+      document.getElementById("customRulesLabel").textContent = resolvePersonalText(config.customRulesLabel);
+
+      Object.entries(config.placeholders).forEach(([id, text]) => {
+        const element = document.getElementById(id);
+        if (element) element.placeholder = resolvePersonalText(text);
+      });
+
+      document.getElementById("microCopy").textContent = resolvePersonalText(config.micro[currentStep - 1]);
+      updatePhotoVideoLabel();
+      updateLocationLabels();
+      updateFinalPageLabels();
+
+      const slider = document.getElementById("partyLevel");
+      const moodElement = document.getElementById("mood");
+      if (slider && moodElement && !moodElement.value) {
+        slider.value = String(toneToLevel(currentTone));
+        renderMoodOptions(Number(slider.value), false);
+      }
+    }
+
+    function openToneSwitcher() {
+      toneSwitcher.classList.remove("hidden");
+    }
+
+    function closeToneSwitcherPanel() {
+      toneSwitcher.classList.add("hidden");
+    }
+
+    function showTonePicker() {
+      hero.classList.add("hidden");
+      wizard.classList.add("hidden");
+      summary.classList.add("hidden");
+      tonePicker.classList.remove("hidden");
+      homeBtn.style.display = "inline-flex";
+      saveState.textContent = "Choose a tone to begin";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+
+    function possessiveName(name) {
+      const clean = (name || "").trim();
+      if (!clean) return "";
+      return /s$/i.test(clean) ? `${clean}’` : `${clean}’s`;
+    }
+
+    function updateOccasionOptions() {
+      const name = document.getElementById("name").value.trim();
+      const possessive = possessiveName(name);
+      const prefix = possessive ? `${possessive} ` : "";
+
+      const labels = {
+        celebration: `${prefix}celebration of life`,
+        funeral: `${prefix}funeral`,
+        farewell: `${prefix}farewell gathering`,
+        memorial: `${prefix}memorial`,
+        party: `${prefix}final party`,
+        custom: "Something else entirely"
+      };
+
+      const select = document.getElementById("occasionName");
+      [...select.options].forEach(option => {
+        if (labels[option.value]) {
+          const label = labels[option.value];
+          option.textContent = label.charAt(0).toUpperCase() + label.slice(1);
+        }
+      });
+    }
+
+
+
+
+
+    function afterwardsLocationText(name, possessive) {
+      if (currentTone === "partystyle") {
+        return name === "you"
+          ? "Preferred final party location"
+          : `${possessive} preferred final party location`;
+      }
+
+      return "Where should everyone head afterwards?";
+    }
+
+
+
+
+    function addPersonalMessageItem(value = {}) {
+      const container = document.getElementById("personalMessagesItems");
+      if (!container) return;
+
+      const item = document.createElement("div");
+      item.className = "repeat-item personal-message-item";
+      item.innerHTML = `
+        <div class="field-grid">
+          <div class="field">
+            <label>Person</label>
+            <input class="personal-message-person" type="text" placeholder="Name or relationship" />
+          </div>
+          <div class="field">
+            <label>Message type</label>
+            <select class="personal-message-type">
+              <option>Message</option>
+              <option>Thank you</option>
+              <option>Advice</option>
+              <option>Memory</option>
+              <option>Apology</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label>Personal message</label>
+            <textarea class="personal-message-text" placeholder="Write the message you would want this person to receive."></textarea>
+          </div>
+        </div>
+        <button class="btn btn-danger mini remove-repeat" type="button">Remove message</button>
+      `;
+
+      const personInput = item.querySelector(".personal-message-person");
+      const typeSelect = item.querySelector(".personal-message-type");
+      const messageInput = item.querySelector(".personal-message-text");
+
+      if (personInput) personInput.value = value.person || "";
+      if (typeSelect && value.type) typeSelect.value = value.type;
+      if (messageInput) messageInput.value = value.message || "";
+
+      item.querySelector(".remove-repeat").addEventListener("click", () => {
+        item.remove();
+        saveData();
+      });
+
+      item.querySelectorAll("input, select, textarea").forEach(input => {
+        input.addEventListener("input", saveData);
+        input.addEventListener("change", saveData);
+      });
+
+      container.appendChild(item);
+    }
+
+    function collectPersonalMessages() {
+      return Array.from(document.querySelectorAll(".personal-message-item")).map(item => ({
+        person: item.querySelector(".personal-message-person")?.value || "",
+        type: item.querySelector(".personal-message-type")?.value || "",
+        message: item.querySelector(".personal-message-text")?.value || ""
+      })).filter(entry => entry.person.trim() || entry.message.trim());
+    }
+
+    function renderPersonalMessages(items = []) {
+      const container = document.getElementById("personalMessagesItems");
+      if (!container) return;
+      container.innerHTML = "";
+      if (Array.isArray(items)) {
+        items.forEach(item => addPersonalMessageItem(item));
+      }
+    }
+
+    function updateReviewDateVisibility() {
+      const reviewReminder = document.getElementById("reviewReminder");
+      const reviewDateField = document.getElementById("reviewDateField");
+      const reviewDate = document.getElementById("reviewDate");
+      if (!reviewReminder || !reviewDateField) return;
+
+      const show = reviewReminder.value === "specific";
+      reviewDateField.classList.toggle("hidden", !show);
+      if (!show && reviewDate) reviewDate.value = "";
+    }
+
+    function updateFinalPageLabels() {
+      const usefulInfoLabel = document.getElementById("usefulInfoLabel");
+      const usefulInfoHint = document.getElementById("usefulInfoHint");
+      const reviewReminderLabel = document.getElementById("reviewReminderLabel");
+      const reviewReminderHint = document.getElementById("reviewReminderHint");
+      const finalMessageLabel = document.getElementById("finalMessageLabel");
+      const personalMessagesLabel = document.getElementById("personalMessagesLabel");
+      const personalMessagesHint = document.getElementById("personalMessagesHint");
+      const finalMessageSupportNote = document.getElementById("finalMessageSupportNote");
+
+      if (!usefulInfoLabel || !usefulInfoHint || !reviewReminderLabel || !reviewReminderHint) return;
+
+      const name = displayName();
+      const possessive = possessiveDisplayName();
+
+      if (currentTone === "classic") {
+        usefulInfoLabel.textContent = name === "you" ? "Useful practical information" : `Useful practical information for ${name}`;
+        usefulInfoHint.textContent = "Add any details that may help the people responsible for making arrangements.";
+      } else if (currentTone === "warm") {
+        usefulInfoLabel.textContent = name === "you" ? "Useful things to know" : `Useful things to know for ${name}`;
+        usefulInfoHint.textContent = "Add anything that would make things easier for the people who care about this plan.";
+      } else if (currentTone === "myway") {
+        usefulInfoLabel.textContent = name === "you" ? "Stuff people should probably know" : `Stuff people should probably know for ${name}`;
+        usefulInfoHint.textContent = "Documents, contacts, plans, or anything that saves people rummaging around later.";
+      } else {
+        usefulInfoLabel.textContent = name === "you" ? "Final-party admin bits" : `${possessive.charAt(0).toUpperCase() + possessive.slice(1)} final-party admin bits`;
+        usefulInfoHint.textContent = "The useful stuff: documents, contacts, plans and anything that stops chaos stealing the spotlight.";
+      }
+
+      if (finalMessageSupportNote) {
+        if (currentTone === "classic") {
+          finalMessageSupportNote.textContent = "This section may take more time than the others. You do not need to complete it all at once, and you can return to it whenever you feel ready.";
+        } else if (currentTone === "warm") {
+          finalMessageSupportNote.textContent = "This part can feel emotional, so be gentle with yourself. You can leave it for now and come back to it when the words feel easier.";
+        } else if (currentTone === "myway") {
+          finalMessageSupportNote.textContent = "No pressure to get the perfect words down straight away. If this bit feels heavy, park it and come back when you are ready.";
+        } else {
+          finalMessageSupportNote.textContent = "This can be the big heartfelt bit, so do it at your own pace. You can always come back later when the right words show up.";
+        }
+      }
+
+      if (finalMessageLabel) {
+        finalMessageLabel.textContent = name === "you" ? "Your final message" : `${possessive.charAt(0).toUpperCase() + possessive.slice(1)} final message`;
+      }
+
+      if (personalMessagesLabel && personalMessagesHint) {
+        personalMessagesLabel.textContent = name === "you" ? "Personal messages for loved ones" : `${possessive.charAt(0).toUpperCase() + possessive.slice(1)} personal messages for loved ones`;
+        personalMessagesHint.textContent = "Add private messages for specific people, if there is anything you would want them to directly hear from you.";
+      }
+
+      reviewReminderLabel.textContent = "Give this another look later";
+      reviewReminderHint.textContent = "Life changes, so it can help to review these wishes now and then.";
+    }
+
+    function updateLocationLabels() {
+      const ceremonyLabel = document.getElementById("ceremonyLocationLabel");
+      const afterwardsLabel = document.getElementById("afterwardsLocationLabel");
+      const afterwardsInput = document.getElementById("afterwardsLocation");
+      if (!ceremonyLabel || !afterwardsLabel) return;
+
+      const name = displayName();
+
+      if (name === "you") {
+        ceremonyLabel.textContent = "Preferred ceremony location";
+        afterwardsLabel.textContent = afterwardsLocationText(name, "");
+      } else {
+        const possessive = possessiveName(name);
+        ceremonyLabel.textContent = `${possessive} preferred ceremony location`;
+        afterwardsLabel.textContent = afterwardsLocationText(name, possessive);
+      }
+
+      if (afterwardsInput) {
+        if (currentTone === "partystyle") {
+          afterwardsInput.placeholder = "Pub, house, venue, restaurant, community hall, or anywhere people should celebrate afterwards...";
+        } else {
+          afterwardsInput.placeholder = "Pub, house, venue, restaurant, community hall, or anywhere people should gather afterwards...";
+        }
+      }
+    }
+
+    function updatePhotoVideoLabel() {
+      const label = document.getElementById("photoNotesLabel");
+      if (!label) return;
+
+      const name = displayName();
+      label.textContent = name === "you" ? "Photos and videos" : `${possessiveName(name)} photos and videos`;
+    }
+
+    function updateFlowerDonationFields() {
+      const selection = document.getElementById("flowers")?.value || "";
+      const flowerField = document.getElementById("flowerDetailsField");
+      const charityField = document.getElementById("charityDetailsField");
+      const flowerInput = document.getElementById("flowerDetails");
+      const charityInput = document.getElementById("charityDetails");
+
+      const showFlowers = selection === "Flowers" || selection === "Both";
+      const showCharity = selection === "Donations" || selection === "Both";
+
+      if (flowerField) flowerField.classList.toggle("hidden", !showFlowers);
+      if (charityField) charityField.classList.toggle("hidden", !showCharity);
+
+      if (!showFlowers && flowerInput) flowerInput.value = "";
+      if (!showCharity && charityInput) charityInput.value = "";
+    }
+
+    function updateCustomDressCodeVisibility() {
+      const dressCode = document.getElementById("dressCode");
+      const customField = document.getElementById("customDressCodeField");
+      const customInput = document.getElementById("customDressCode");
+      if (!dressCode || !customField) return;
+
+      const show = dressCode.value === "custom";
+      customField.classList.toggle("hidden", !show);
+      if (!show && customInput) customInput.value = "";
+    }
+
+    function updateCustomTitleVisibility() {
+      const show = document.getElementById("occasionName").value === "custom";
+      document.getElementById("customTitleField").classList.toggle("hidden", !show);
+      if (!show) document.getElementById("customTitle").value = "";
+    }
+
+
+    const soundSections = ["entrance", "reflection", "leaving", "afterwards"];
+
+    function soundTypeOptions(selected = "Song") {
+      return ["Song", "Hymn", "Poem", "Psalm", "Reading", "Other"]
+        .map(type => `<option ${type === selected ? "selected" : ""}>${type}</option>`)
+        .join("");
+    }
+
+    function searchLabelForType(type) {
+      return ["Song", "Hymn"].includes(type) ? "Find on YouTube" : "Search online";
+    }
+
+    function searchUrlForItem(type, text) {
+      const query = encodeURIComponent((text || "").trim());
+      if (!query) return "";
+      if (["Song", "Hymn"].includes(type)) {
+        return `https://www.youtube.com/results?search_query=${query}`;
+      }
+      return `https://www.google.com/search?q=${query}`;
+    }
+
+    async function copyTextToClipboard(text) {
+      if (!text || !text.trim()) {
+        showToast("Nothing to copy yet");
+        return;
+      }
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const temp = document.createElement("textarea");
+          temp.value = text;
+          temp.style.position = "fixed";
+          temp.style.left = "-9999px";
+          document.body.appendChild(temp);
+          temp.focus();
+          temp.select();
+          document.execCommand("copy");
+          temp.remove();
+        }
+        showToast("Copied");
+      } catch {
+        showToast("Copy failed");
+      }
+    }
+
+    function addSoundItem(section, item = { type: "Song", text: "", link: "" }, saveAfter = true, removable = true) {
+      const container = document.getElementById(`${section}Items`);
+      const row = document.createElement("div");
+      row.className = "sound-item";
+      row.innerHTML = `
+        <select class="sound-type" aria-label="Type">
+          ${soundTypeOptions(item.type || "Song")}
+        </select>
+        <input class="sound-text" placeholder="Add a title, name or details" value="${escapeHtml(item.text || "")}" />
+        <button type="button" class="search-sound-btn">${searchLabelForType(item.type || "Song")}</button>
+        ${removable ? `<button type="button" class="remove-sound-btn" aria-label="Remove">×</button>` : ""}
+        <input class="sound-link" placeholder="Optional: paste the exact YouTube or web link here" value="${escapeHtml(item.link || "")}" />
+      `;
+
+      const typeSelect = row.querySelector(".sound-type");
+      const textInput = row.querySelector(".sound-text");
+      const searchButton = row.querySelector(".search-sound-btn");
+      const linkInput = row.querySelector(".sound-link");
+
+      typeSelect.addEventListener("change", () => {
+        searchButton.textContent = searchLabelForType(typeSelect.value);
+        saveData(true);
+      });
+
+      searchButton.addEventListener("click", () => {
+        const url = searchUrlForItem(typeSelect.value, textInput.value);
+        if (!url) {
+          showToast("Add a title first");
+          return;
+        }
+        window.open(url, "_blank", "noopener,noreferrer");
+      });
+
+      const removeSoundBtn = row.querySelector(".remove-sound-btn");
+      if (removeSoundBtn) {
+        removeSoundBtn.addEventListener("click", () => {
+          row.remove();
+          if (!container.children.length) addSoundItem(section, { type: "Song", text: "", link: "" }, false, false);
+          saveData(true);
+        });
+      }
+
+      row.querySelectorAll("select, input").forEach(el => {
+        el.addEventListener("input", () => saveData(true));
+        el.addEventListener("change", () => saveData(true));
+      });
+
+      container.appendChild(row);
+      if (saveAfter) saveData(true);
+    }
+
+    function getSoundItems(section) {
+      return [...document.querySelectorAll(`#${section}Items .sound-item`)]
+        .map(row => ({
+          type: row.querySelector(".sound-type").value,
+          text: row.querySelector(".sound-text").value,
+          link: row.querySelector(".sound-link").value
+        }))
+        .filter(item => item.text.trim() || item.link.trim());
+    }
+
+    function setSoundItems(section, items) {
+      const container = document.getElementById(`${section}Items`);
+      container.innerHTML = "";
+      const list = Array.isArray(items) && items.length ? items : [{ type: "Song", text: "", link: "" }];
+      list.forEach((item, index) => addSoundItem(section, item, false, index !== 0));
+    }
+
+    function initialiseSoundSections() {
+      soundSections.forEach(section => {
+        const container = document.getElementById(`${section}Items`);
+        if (container && !container.children.length) {
+          addSoundItem(section, { type: "Song", text: "", link: "" }, false, false);
+        }
+      });
+    }
 
     function showToast(message = "Saved") {
       toast.textContent = message;
@@ -841,8 +1974,14 @@
         }
       }
 
-      data.partyLevel = document.getElementById("partyLevel").value;
+      const partyLevelElement = document.getElementById("partyLevel");
+      if (partyLevelElement) data.partyLevel = partyLevelElement.value;
+      soundSections.forEach(section => {
+        data[`${section}Items`] = getSoundItems(section);
+      });
+      data.personalMessages = collectPersonalMessages();
       data.currentStep = currentStep;
+      data.tone = currentTone;
       return data;
     }
 
@@ -878,6 +2017,29 @@
           });
         }
 
+        currentTone = data.tone || "warm";
+        applyTone(currentTone);
+        const loadedPartyLevel = document.getElementById("partyLevel");
+        if (loadedPartyLevel) {
+          loadedPartyLevel.value = String(data.partyLevel || toneToLevel(currentTone));
+          renderMoodOptions(Number(loadedPartyLevel.value), true);
+          if (data.mood && document.getElementById("mood")) {
+            document.getElementById("mood").value = data.mood;
+            document.querySelectorAll("#moodOptions .choice-card").forEach(card => {
+              card.classList.toggle("selected", card.dataset.value === data.mood);
+            });
+          }
+        }
+        soundSections.forEach(section => setSoundItems(section, data[`${section}Items`]));
+        updateOccasionOptions();
+        updateCustomTitleVisibility();
+        updateCustomDressCodeVisibility();
+        updateFlowerDonationFields();
+        updatePhotoVideoLabel();
+        updateLocationLabels();
+        renderPersonalMessages(data.personalMessages || []);
+        updateFinalPageLabels();
+        updateReviewDateVisibility();
         currentStep = Number(data.currentStep || 1);
         updateStep();
         saveState.textContent = "Saved plan found";
@@ -890,16 +2052,34 @@
     function clearFormForNewPlan() {
       form.reset();
       document.querySelectorAll(".choice-card").forEach(card => card.classList.remove("selected"));
-      document.getElementById("mood").value = "";
-      document.getElementById("partyLevel").value = "3";
+      const moodReset = document.getElementById("mood");
+      if (moodReset) moodReset.value = "";
+      const resetPartyLevel = document.getElementById("partyLevel");
+      if (resetPartyLevel) {
+        resetPartyLevel.value = String(toneToLevel(currentTone));
+        renderMoodOptions(toneToLevel(currentTone), false);
+      }
+      soundSections.forEach(section => setSoundItems(section, []));
+      document.getElementById("customTitleField").classList.add("hidden");
+      updateOccasionOptions();
+      updateCustomDressCodeVisibility();
+      updateFlowerDonationFields();
+      updatePhotoVideoLabel();
+      updateLocationLabels();
+      renderPersonalMessages([]);
+      updateFinalPageLabels();
+      updateReviewDateVisibility();
       currentStep = 1;
     }
 
     function showHome() {
       hero.classList.remove("hidden");
+      tonePicker.classList.add("hidden");
       wizard.classList.add("hidden");
       summary.classList.add("hidden");
       homeBtn.style.display = "none";
+      toneBadge.classList.add("hidden");
+      document.body.dataset.tone = "warm";
 
       const hasSaved = Boolean(localStorage.getItem(STORAGE_KEY));
       document.getElementById("continueBtn").style.display = hasSaved ? "inline-flex" : "none";
@@ -909,6 +2089,7 @@
 
     function startPlanner(useSaved = false) {
       hero.classList.add("hidden");
+      tonePicker.classList.add("hidden");
       summary.classList.add("hidden");
       wizard.classList.remove("hidden");
       homeBtn.style.display = "inline-flex";
@@ -929,9 +2110,15 @@
 
       progressFill.style.width = `${(currentStep / steps.length) * 100}%`;
       progressCount.textContent = `${currentStep} of ${steps.length}`;
+
+      document.querySelectorAll("[data-progress-step]").forEach(label => {
+        const step = Number(label.dataset.progressStep);
+        label.classList.toggle("active", step === currentStep);
+        label.classList.toggle("done", step < currentStep);
+      });
       backBtn.style.visibility = currentStep === 1 ? "hidden" : "visible";
       nextBtn.textContent = currentStep === steps.length ? "Create my plan" : "Next";
-      document.getElementById("microCopy").textContent = microMessages[currentStep - 1];
+      document.getElementById("microCopy").textContent = resolvePersonalText(toneContent[currentTone].micro[currentStep - 1]);
       if (!skipSave) saveData(true);
     }
 
@@ -948,6 +2135,29 @@
       return value && String(value).trim() ? escapeHtml(value) : `<em>${fallback}</em>`;
     }
 
+    function formatSoundItems(items) {
+      if (!Array.isArray(items) || !items.length) return "<em>Not added yet</em>";
+      return items.map(item => {
+        const main = `${escapeHtml(item.type)}: ${escapeHtml(item.text || "No title added")}`;
+        const link = item.link ? `<br><small>Link: ${escapeHtml(item.link)}</small>` : "";
+        return `${main}${link}`;
+      }).join("<br><br>");
+    }
+
+    function renderSoundSummary(data) {
+      const labels = {
+        entrance: "Entrance",
+        reflection: "Reflection",
+        leaving: "Leaving",
+        afterwards: "Afterwards"
+      };
+
+      return soundSections.map(section => `
+        <p><strong>${labels[section]}:</strong></p>
+        <p>${formatSoundItems(data[`${section}Items`] || [])}</p>
+      `).join("");
+    }
+
     function makeCard(title, content) {
       return `<article class="summary-card"><h3>${title}</h3>${content}</article>`;
     }
@@ -956,11 +2166,14 @@
       saveData(true);
       const data = getData();
       const name = data.name?.trim() || "My";
-      const title = data.customTitle?.trim() || `${name === "My" ? "My" : name + "'s"} Send-Off Plan`;
+      const possessive = name === "My" ? "My" : possessiveName(name);
+      const title = (data.occasionName === "custom" && data.customTitle?.trim())
+        ? data.customTitle.trim()
+        : `${possessive} Final Party Plan`;
 
       document.getElementById("summaryTitle").textContent = title;
       document.getElementById("summarySubtitle").textContent =
-        data.openingMessage?.trim() || "A celebration shaped by the person who knows you best: you.";
+        "A celebration shaped by the person who knows you best: you.";
 
       const partyLabels = {
         "1": "Quiet and reflective",
@@ -976,38 +2189,48 @@
 
       const cards = [
         makeCard("The occasion", `
-          <p><strong>Called:</strong> ${valueOrFallback(data.occasionName)}</p>
-          <p><strong>Mood:</strong> ${valueOrFallback(data.mood)}</p>
-          <p><strong>Energy:</strong> ${partyLabels[data.partyLevel] || "A balanced mix"}</p>
+          <p><strong>Name:</strong> ${valueOrFallback(data.name)}</p>
+          <p><strong>Occasion name:</strong> ${escapeHtml(title)}</p>
         `),
-        makeCard("The soundtrack", `
-          <p><strong>Entrance:</strong> ${valueOrFallback(data.entranceSong)}</p>
-          <p><strong>Reflection:</strong> ${valueOrFallback(data.reflectionSong)}</p>
-          <p><strong>Leaving:</strong> ${valueOrFallback(data.leavingSong)}</p>
-          <p><strong>Afterwards:</strong> ${valueOrFallback(data.wakeMusic)}</p>
-          <p><strong>Absolutely banned:</strong> ${valueOrFallback(data.bannedSong, "No musical enemies declared")}</p>
-        `),
-        makeCard("Look and feel", `
-          <p><strong>Dress code:</strong> ${valueOrFallback(data.dressCode)}</p>
-          <p><strong>Colours/theme:</strong> ${valueOrFallback(data.colourTheme)}</p>
-          <p><strong>Flowers/donations:</strong> ${valueOrFallback(data.flowers)}</p>
+        makeCard("Location, look and feel", `
+          <p><strong>Preferred ceremony location:</strong> ${valueOrFallback(data.ceremonyLocation)}</p>
+          <p><strong>${currentTone === "partystyle" ? "Preferred final party location" : "Where should everyone head afterwards?"}:</strong> ${valueOrFallback(data.afterwardsLocation)}</p>
+          <p><strong>Dress code:</strong> ${valueOrFallback(data.dressCode === "custom" ? data.customDressCode : data.dressCode)}</p>
+          <p><strong>Colours / theme:</strong> ${valueOrFallback(data.colourTheme)}</p>
+          <p><strong>Flowers / donations:</strong> ${valueOrFallback(data.flowers)}</p>
+          ${data.flowerDetails?.trim() ? `<p><strong>Flower preferences:</strong> ${escapeHtml(data.flowerDetails)}</p>` : ""}
+          ${data.donationDetails?.trim() ? `<p><strong>Donation details:</strong> ${escapeHtml(data.donationDetails)}</p>` : ""}
         `),
         makeCard("Food, photos and memories", `
-          <p><strong>Food and drink:</strong> ${valueOrFallback(data.foodDrink)}</p>
-          <p><strong>Photos/videos:</strong> ${valueOrFallback(data.photoNotes)}</p>
-          <p><strong>Story to share:</strong> ${valueOrFallback(data.story)}</p>
+          <p><strong>Food / drink:</strong> ${valueOrFallback(data.food)}</p>
+          <p><strong>Photos / videos:</strong> ${valueOrFallback(data.photoNotes)}</p>
+          <p><strong>Stories / memories:</strong> ${valueOrFallback(data.memoryStory)}</p>
         `),
-        makeCard("People involved", `<p>${valueOrFallback(data.people)}</p>`),
-        makeCard("The rules", `
-          ${rules}
-          ${data.customRules?.trim() ? `<p><strong>Also:</strong> ${escapeHtml(data.customRules)}</p>` : ""}
+        makeCard("People involved", `<p>${valueOrFallback(data.peopleInvolved)}</p>`),
+        makeCard("How it will sound", renderSoundSummary(data)),
+        makeCard("The wishes", `
+          <p>${data.rules?.length ? data.rules.map(escapeHtml).join("<br>") : "No wishes selected"}</p>
+          <p><strong>Other wishes:</strong> ${valueOrFallback(data.customRules)}</p>
         `),
         makeCard("Final message", `<p>${valueOrFallback(data.finalMessage)}</p>`),
+        makeCard("Personal messages for loved ones", data.personalMessages?.length
+          ? data.personalMessages.map(msg => `
+              <p><strong>${escapeHtml(msg.person || "Unnamed person")}</strong>${msg.type ? ` <span class="hint">(${escapeHtml(msg.type)})</span>` : ""}</p>
+              <p>${escapeHtml(msg.message || "No message added")}</p>
+            `).join("")
+          : `<p>No personal messages added</p>`
+        ),
+        makeCard("Useful things to know", `<p>${valueOrFallback(data.usefulInfo, "No useful information added")}</p>`),
+        makeCard("Review reminder", `
+          <p>${valueOrFallback(data.reviewReminder === "specific" ? "Specific date selected" : data.reviewReminder, "No review reminder selected")}</p>
+          ${data.reviewDate?.trim() ? `<p><strong>Date:</strong> ${escapeHtml(data.reviewDate)}</p>` : ""}
+        `),
         makeCard("Practical notes", `<p>${valueOrFallback(data.organiserNotes, "No private notes added")}</p>`)
       ];
 
       document.getElementById("summaryGrid").innerHTML = cards.join("");
       wizard.classList.add("hidden");
+      tonePicker.classList.add("hidden");
       hero.classList.add("hidden");
       summary.classList.remove("hidden");
       homeBtn.style.display = "inline-flex";
@@ -1015,22 +2238,57 @@
       showToast("Your plan is ready");
     }
 
+    toneBadge.addEventListener("click", openToneSwitcher);
+    closeToneSwitcher.addEventListener("click", closeToneSwitcherPanel);
+
+    toneSwitcher.addEventListener("click", (event) => {
+      if (event.target === toneSwitcher) closeToneSwitcherPanel();
+    });
+
+    document.querySelectorAll("[data-switch-tone]").forEach(card => {
+      card.addEventListener("click", () => {
+        applyTone(card.dataset.switchTone);
+        saveData(true);
+        closeToneSwitcherPanel();
+        showToast(`Tone changed to ${toneContent[currentTone].label}`);
+      });
+    });
+
     homeBtn.addEventListener("click", showHome);
 
-    document.getElementById("startBtn").addEventListener("click", () => startPlanner(false));
+    document.getElementById("startBtn").addEventListener("click", showTonePicker);
+
+    document.querySelectorAll("[data-tone-choice]").forEach(card => {
+      card.addEventListener("click", () => {
+        applyTone(card.dataset.toneChoice);
+        clearFormForNewPlan();
+        startPlanner(false);
+      });
+    });
     document.getElementById("continueBtn").addEventListener("click", () => {
       const loaded = loadData();
       startPlanner(loaded);
     });
 
-    document.querySelectorAll(".single-choice .choice-card").forEach(card => {
-      card.addEventListener("click", () => {
-        const group = card.closest(".single-choice");
-        group.querySelectorAll(".choice-card").forEach(c => c.classList.remove("selected"));
-        card.classList.add("selected");
-        const field = group.dataset.field;
-        document.getElementById(field).value = card.dataset.value;
-        saveData(true);
+
+
+    function jumpToStep(stepNumber) {
+      const targetStep = Number(stepNumber);
+      if (!targetStep || targetStep < 1 || targetStep > steps.length) return;
+
+      saveData(true);
+      currentStep = targetStep;
+      updateStep();
+      window.scrollTo({ top: wizard.offsetTop - 10, behavior: "smooth" });
+    }
+
+    document.querySelectorAll("[data-progress-step]").forEach(label => {
+      label.addEventListener("click", () => jumpToStep(label.dataset.progressStep));
+      label.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          jumpToStep(label.dataset.progressStep);
+        }
       });
     });
 
@@ -1050,6 +2308,37 @@
         updateStep();
         window.scrollTo({ top: wizard.offsetTop - 10, behavior: "smooth" });
       }
+    });
+
+    document.getElementById("name").addEventListener("input", () => {
+      updateOccasionOptions();
+      applyTone(currentTone);
+    });
+    document.getElementById("occasionName").addEventListener("change", updateCustomTitleVisibility);
+    document.getElementById("dressCode").addEventListener("change", updateCustomDressCodeVisibility);
+    document.getElementById("flowers").addEventListener("change", updateFlowerDonationFields);
+    const reviewReminderSelect = document.getElementById("reviewReminder");
+    if (reviewReminderSelect) {
+      reviewReminderSelect.addEventListener("change", updateReviewDateVisibility);
+    }
+    const addPersonalMessageBtn = document.getElementById("addPersonalMessageBtn");
+    if (addPersonalMessageBtn) {
+      addPersonalMessageBtn.addEventListener("click", () => {
+        addPersonalMessageItem();
+        saveData();
+      });
+    }
+
+    const partyLevelControl = document.getElementById("partyLevel");
+    if (partyLevelControl) {
+      partyLevelControl.addEventListener("input", (event) => {
+        renderMoodOptions(Number(event.target.value), false);
+        saveData(true);
+      });
+    }
+
+    document.querySelectorAll("[data-add-sound]").forEach(button => {
+      button.addEventListener("click", () => addSoundItem(button.dataset.addSound));
     });
 
     form.addEventListener("input", () => {
@@ -1073,9 +2362,11 @@
       localStorage.removeItem(STORAGE_KEY);
       form.reset();
       document.querySelectorAll(".choice-card").forEach(card => card.classList.remove("selected"));
-      document.getElementById("mood").value = "";
+      const moodReset = document.getElementById("mood");
+      if (moodReset) moodReset.value = "";
       currentStep = 1;
       summary.classList.add("hidden");
+      tonePicker.classList.add("hidden");
       wizard.classList.add("hidden");
       showHome();
       showToast("Plan cleared");
@@ -1084,7 +2375,20 @@
     const hasSaved = Boolean(localStorage.getItem(STORAGE_KEY));
     document.getElementById("continueBtn").style.display = hasSaved ? "inline-flex" : "none";
     saveState.textContent = hasSaved ? "Saved plan found" : "Saved only on this device";
+    document.body.dataset.tone = "warm";
+    updateOccasionOptions();
+    updateCustomTitleVisibility();
+    updateCustomDressCodeVisibility();
+    updateFlowerDonationFields();
+    updatePhotoVideoLabel();
+    updateLocationLabels();
+    renderPersonalMessages();
+    updateFinalPageLabels();
+    updateReviewDateVisibility();
+    if (document.getElementById("partyLevel")) renderMoodOptions(2, false);
+    initialiseSoundSections();
     hero.classList.remove("hidden");
+    tonePicker.classList.add("hidden");
     wizard.classList.add("hidden");
     summary.classList.add("hidden");
   </script>
