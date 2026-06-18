@@ -15,6 +15,9 @@
       --coral: #f0b84b;
       --gold: #ffe8a8;
       --line: #d9e9f1;
+      --glow-a: rgba(62,140,168,.16);
+      --glow-b: rgba(240,184,75,.18);
+      --glow-c: rgba(255,232,168,.22);
       --shadow: 0 16px 40px rgba(37, 73, 91, 0.13);
       --radius: 22px;
     }
@@ -26,9 +29,9 @@
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 14% 14%, rgba(62,140,168,.16), transparent 30%),
-        radial-gradient(circle at 88% 18%, rgba(240,184,75,.18), transparent 30%),
-        radial-gradient(circle at 58% 92%, rgba(255,232,168,.22), transparent 34%),
+        radial-gradient(circle at 14% 14%, var(--glow-a), transparent 30%),
+        radial-gradient(circle at 88% 18%, var(--glow-b), transparent 30%),
+        radial-gradient(circle at 58% 92%, var(--glow-c), transparent 34%),
         var(--bg);
       min-height: 100vh;
     }
@@ -304,6 +307,19 @@
     }
 
 
+
+
+    body[data-tone="classic"] .gentle-note,
+    body[data-tone="classic"] .summary-note { background: #f1f6fa; }
+
+    body[data-tone="warm"] .gentle-note,
+    body[data-tone="warm"] .summary-note { background: #f1f8f3; }
+
+    body[data-tone="myway"] .gentle-note,
+    body[data-tone="myway"] .summary-note { background: #f8effb; }
+
+    body[data-tone="partystyle"] .gentle-note,
+    body[data-tone="partystyle"] .summary-note { background: #fff0f8; }
 
     .gentle-note {
       border: 1px solid var(--line);
@@ -784,19 +800,8 @@
 
     .tone-card.partystyle p { color: #493650; }
 
-    body[data-tone="classic"] {
-      --bg: #f3f9fd;
-      --panel: #ffffff;
-      --ink: #20313a;
-      --muted: #657984;
-      --teal: #4f7f96;
-      --teal-dark: #385f73;
-      --coral: #d8b25f;
-      --gold: #f4e5b6;
-      --line: #d9e9f1;
-    }
-
-    body[data-tone="warm"] {
+    /* The landing page has its own neutral sky-blue palette, separate from every tone choice. */
+    body[data-tone="home"] {
       --bg: #eef8ff;
       --panel: #ffffff;
       --ink: #20313a;
@@ -806,30 +811,70 @@
       --coral: #f0b84b;
       --gold: #ffe8a8;
       --line: #d9e9f1;
+      --glow-a: rgba(62,140,168,.18);
+      --glow-b: rgba(240,184,75,.16);
+      --glow-c: rgba(255,232,168,.24);
+    }
+
+    /* Tone palettes: clear, confident colour without becoming overly bright. */
+    body[data-tone="classic"] {
+      --bg: #eef3f8;
+      --panel: #ffffff;
+      --ink: #1c2c3b;
+      --muted: #5d6d7b;
+      --teal: #284f73;
+      --teal-dark: #173954;
+      --coral: #b98a3e;
+      --gold: #efd99d;
+      --line: #cbd9e5;
+      --glow-a: rgba(40,79,115,.19);
+      --glow-b: rgba(185,138,62,.17);
+      --glow-c: rgba(215,228,239,.62);
+    }
+
+    body[data-tone="warm"] {
+      --bg: #f3faf5;
+      --panel: #ffffff;
+      --ink: #294034;
+      --muted: #657a6b;
+      --teal: #5f8b70;
+      --teal-dark: #416852;
+      --coral: #d89c7a;
+      --gold: #f0dca6;
+      --line: #d8e8dc;
+      --glow-a: rgba(95,139,112,.20);
+      --glow-b: rgba(216,156,122,.17);
+      --glow-c: rgba(240,220,166,.25);
     }
 
     body[data-tone="myway"] {
-      --bg: #edf6ff;
+      --bg: #f9f3fb;
       --panel: #ffffff;
-      --ink: #21313d;
-      --muted: #617782;
-      --teal: #2f8fb4;
-      --teal-dark: #246f8d;
-      --coral: #f0a94b;
-      --gold: #ffe39a;
-      --line: #cfe6f3;
+      --ink: #352640;
+      --muted: #705d7d;
+      --teal: #79519c;
+      --teal-dark: #563271;
+      --coral: #ce6f75;
+      --gold: #efba8b;
+      --line: #e4d2eb;
+      --glow-a: rgba(121,81,156,.21);
+      --glow-b: rgba(206,111,117,.18);
+      --glow-c: rgba(239,186,139,.25);
     }
 
     body[data-tone="partystyle"] {
-      --bg: #eaf7ff;
+      --bg: #fff4fa;
       --panel: #ffffff;
-      --ink: #19313f;
-      --muted: #5f7884;
-      --teal: #1f97c1;
-      --teal-dark: #15749a;
-      --coral: #f3b33f;
-      --gold: #ffd76d;
-      --line: #c9e7f5;
+      --ink: #401b3c;
+      --muted: #79536f;
+      --teal: #cf287f;
+      --teal-dark: #991957;
+      --coral: #eea722;
+      --gold: #d986e8;
+      --line: #f0cddd;
+      --glow-a: rgba(207,40,127,.22);
+      --glow-b: rgba(238,167,34,.22);
+      --glow-c: rgba(191,80,213,.18);
     }
 
     .tone-badge {
@@ -1238,6 +1283,7 @@
 
             <div class="field" style="margin-top:20px;">
               <label for="customRules" id="customRulesLabel">Anything else that is non-negotiable?</label>
+              <span class="hint" id="customRulesHint">Add anything else that matters — what to include, what to avoid, or who you would prefer not to attend.</span>
               <textarea id="customRules" name="customRules" placeholder="No carnations. Somebody bring decent speakers. Please do not let Uncle Dave take over the microphone."></textarea>
             </div>
           </section>
@@ -1384,6 +1430,7 @@
 
     let currentStep = 1;
     let currentTone = "warm";
+    document.body.dataset.tone = "home";
 
     const microMessages = [
       "Take your time. There are no wrong answers here.",
@@ -1717,6 +1764,7 @@
       const personalMessagesLabel = document.getElementById("personalMessagesLabel");
       const personalMessagesHint = document.getElementById("personalMessagesHint");
       const finalMessageSupportNote = document.getElementById("finalMessageSupportNote");
+      const customRulesHint = document.getElementById("customRulesHint");
 
       if (!usefulInfoLabel || !usefulInfoHint || !reviewReminderLabel || !reviewReminderHint) return;
 
@@ -1756,6 +1804,10 @@
       if (personalMessagesLabel && personalMessagesHint) {
         personalMessagesLabel.textContent = name === "you" ? "Personal messages for loved ones" : `${possessive.charAt(0).toUpperCase() + possessive.slice(1)} personal messages for loved ones`;
         personalMessagesHint.textContent = "Add private messages for specific people, if there is anything you would want them to directly hear from you.";
+      }
+
+      if (customRulesHint) {
+        customRulesHint.textContent = "Add anything else that matters — what to include, what to avoid, or who you would prefer not to attend.";
       }
 
       reviewReminderLabel.textContent = "Give this another look later";
@@ -2079,7 +2131,7 @@
       summary.classList.add("hidden");
       homeBtn.style.display = "none";
       toneBadge.classList.add("hidden");
-      document.body.dataset.tone = "warm";
+      document.body.dataset.tone = "home";
 
       const hasSaved = Boolean(localStorage.getItem(STORAGE_KEY));
       document.getElementById("continueBtn").style.display = hasSaved ? "inline-flex" : "none";
@@ -2375,7 +2427,7 @@
     const hasSaved = Boolean(localStorage.getItem(STORAGE_KEY));
     document.getElementById("continueBtn").style.display = hasSaved ? "inline-flex" : "none";
     saveState.textContent = hasSaved ? "Saved plan found" : "Saved only on this device";
-    document.body.dataset.tone = "warm";
+    document.body.dataset.tone = "home";
     updateOccasionOptions();
     updateCustomTitleVisibility();
     updateCustomDressCodeVisibility();
