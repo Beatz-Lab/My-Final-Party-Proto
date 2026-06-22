@@ -1353,7 +1353,7 @@
 
             <div class="field" style="margin-top:20px;">
               <label for="customRules" id="customRulesLabel">Anything else that is non-negotiable?</label>
-              <span class="hint" id="customRulesHint">Add anything else that matters — what to include, what to avoid, and those who really shouldn’t make the guest list? Over my dead body…..oh, wait</span>
+              <span class="hint" id="customRulesHint">Add anything else that matters — what to include, what to avoid, or anyone you would prefer not to attend.</span>
               <textarea id="customRules" name="customRules" placeholder="No carnations. Somebody bring decent speakers. Please do not let Uncle Dave take over the microphone."></textarea>
             </div>
           </section>
@@ -1944,7 +1944,7 @@
       }
 
       if (customRulesHint) {
-        customRulesHint.textContent = "Add anything else that matters — what to include, what to avoid, and those who really shouldn’t make the guest list? Over my dead body…..oh, wait";
+        customRulesHint.textContent = currentTone === "partystyle" ? "Add anything else that matters — what to include, what to avoid, and those who really shouldn’t make the guest list? Over my dead body…..oh, wait" : "Add anything else that matters — what to include, what to avoid, or anyone you would prefer not to attend.";
       }
 
       reviewReminderLabel.textContent = "Give this another look later";
