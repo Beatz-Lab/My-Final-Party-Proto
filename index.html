@@ -347,6 +347,49 @@
       color: var(--teal-dark);
     }
 
+
+    .photo-upload-wrap {
+      margin-top: 14px;
+      padding: 14px;
+      border: 1px dashed var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,.62);
+    }
+
+    .photo-upload-wrap input[type="file"] {
+      margin-top: 10px;
+      padding: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      width: 100%;
+    }
+
+    .photo-preview {
+      margin-top: 14px;
+      display: grid;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .photo-preview img {
+      width: min(100%, 420px);
+      max-height: 260px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 24px rgba(37, 73, 91, .12);
+    }
+
+    .summary-photo {
+      width: min(100%, 320px);
+      max-height: 220px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      margin-top: 10px;
+    }
+
     .field-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1017,7 +1060,7 @@
 
     <main>
       <section class="hero" id="hero">
-        <span class="eyebrow">A gentler way to plan ahead</span>
+        <span class="eyebrow">The kindest thing you can leave your loved ones: memories, not decisions.</span>
         <h1>Your life. Your stories. Your send-off. Your final party.</h1>
         <p class="hero-copy">
           Put together the celebration you would actually want — your music, your people, your rules.
@@ -1096,6 +1139,33 @@
             <p class="step-intro" id="step1Intro">Nothing too dramatic yet. Start with your name and a few simple questions to create the send-off that feels like you.</p>
 
             <div class="field-grid">
+              <div class="field full">
+                <label for="laidToRest">How would you like to be laid to rest? Earth or Ashes?</label>
+                <select id="laidToRest" name="laidToRest">
+                  <option value="">Choose one</option>
+                  <option value="Earth / buried">Earth / buried</option>
+                  <option value="Ashes / cremated">Ashes / cremated</option>
+                  <option value="Not sure yet">Not sure yet</option>
+                  <option value="Something else">Something else</option>
+                </select>
+              </div>
+
+              <div class="field full hidden" id="restingPlaceField">
+                <label for="restingPlace" id="restingPlaceLabel">Choose your forever resting place</label>
+                <span class="hint" id="restingPlaceHint">Add where you would like to be buried, where ashes should be scattered, or any special location people should know about.</span>
+                <textarea id="restingPlace" name="restingPlace" placeholder="Cemetery, family plot, favourite view, garden, beach, woodland, or exact instructions for ashes."></textarea>
+
+                <div class="photo-upload-wrap">
+                  <label for="restingPlacePhoto" id="restingPlacePhotoLabel">Optional location photo</label>
+                  <span class="hint">Upload a photo if it helps show the exact place you mean.</span>
+                  <input id="restingPlacePhoto" name="restingPlacePhoto" type="file" accept="image/*" />
+                  <div class="photo-preview hidden" id="restingPlacePhotoPreviewWrap">
+                    <img id="restingPlacePhotoPreview" alt="Resting place photo preview" />
+                    <button class="btn btn-danger mini" type="button" id="removeRestingPlacePhotoBtn">Remove photo</button>
+                  </div>
+                </div>
+              </div>
+
               <div class="field">
                 <label for="name">Your name</label>
                 <input id="name" name="name" placeholder="For example, Alex" />
@@ -1283,7 +1353,7 @@
 
             <div class="field" style="margin-top:20px;">
               <label for="customRules" id="customRulesLabel">Anything else that is non-negotiable?</label>
-              <span class="hint" id="customRulesHint">Add anything else that matters — what to include, what to avoid, or who you would prefer not to attend.</span>
+              <span class="hint" id="customRulesHint">Add anything else that matters — what to include, what to avoid, and those who really shouldn’t make the guest list? Over my dead body…..oh, wait</span>
               <textarea id="customRules" name="customRules" placeholder="No carnations. Somebody bring decent speakers. Please do not let Uncle Dave take over the microphone."></textarea>
             </div>
           </section>
@@ -1600,6 +1670,7 @@
       document.getElementById("microCopy").textContent = resolvePersonalText(config.micro[currentStep - 1]);
       updatePhotoVideoLabel();
       updateLocationLabels();
+      updateRestingPlaceFields();
       updateFinalPageLabels();
 
       const slider = document.getElementById("partyLevel");
@@ -1744,6 +1815,72 @@
       }
     }
 
+
+    function updateRestingPlaceFields() {
+      const laidToRest = document.getElementById("laidToRest");
+      const restingPlaceField = document.getElementById("restingPlaceField");
+      const restingPlaceLabel = document.getElementById("restingPlaceLabel");
+      const restingPlaceHint = document.getElementById("restingPlaceHint");
+      const restingPlace = document.getElementById("restingPlace");
+
+      if (!laidToRest || !restingPlaceField || !restingPlaceLabel || !restingPlaceHint) return;
+
+      const show = Boolean(laidToRest.value);
+      restingPlaceField.classList.toggle("hidden", !show);
+
+      if (currentTone === "classic") {
+        restingPlaceLabel.textContent = "Preferred resting place";
+        restingPlaceHint.textContent = "Add the burial location, ashes location, cemetery, crematorium, or any specific instructions.";
+        if (restingPlace) restingPlace.placeholder = "Cemetery, family plot, ashes location, or exact instructions.";
+      } else if (currentTone === "warm") {
+        restingPlaceLabel.textContent = "Choose your forever resting place";
+        restingPlaceHint.textContent = "Add the place that would feel right, whether that is burial, ashes, or somewhere meaningful.";
+        if (restingPlace) restingPlace.placeholder = "A favourite view, garden, beach, woodland, family place, or exact ashes instructions.";
+      } else if (currentTone === "myway") {
+        restingPlaceLabel.textContent = "Where should the final stop be?";
+        restingPlaceHint.textContent = "Add the place people need to know about — burial spot, ashes spot, or somewhere that feels very you.";
+        if (restingPlace) restingPlace.placeholder = "Favourite place, family plot, garden, beach, woodland, or somewhere only you would pick.";
+      } else {
+        restingPlaceLabel.textContent = "Where should the final send-off land?";
+        restingPlaceHint.textContent = "Add the place for the big final stop — earth, ashes, view, beach, garden, or anywhere that feels right.";
+        if (restingPlace) restingPlace.placeholder = "The perfect final-party location: garden, beach, view, family place, or exact ashes instructions.";
+      }
+    }
+
+    function setRestingPlacePhotoPreview(dataUrl = "") {
+      const img = document.getElementById("restingPlacePhotoPreview");
+      const wrap = document.getElementById("restingPlacePhotoPreviewWrap");
+      if (!img || !wrap) return;
+
+      if (dataUrl) {
+        img.src = dataUrl;
+        img.dataset.photoData = dataUrl;
+        wrap.classList.remove("hidden");
+      } else {
+        img.removeAttribute("src");
+        delete img.dataset.photoData;
+        wrap.classList.add("hidden");
+      }
+    }
+
+    function handleRestingPlacePhotoChange(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      if (!file.type.startsWith("image/")) {
+        showToast("Please choose an image");
+        event.target.value = "";
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        setRestingPlacePhotoPreview(String(reader.result || ""));
+        saveData(true);
+      };
+      reader.readAsDataURL(file);
+    }
+
     function updateReviewDateVisibility() {
       const reviewReminder = document.getElementById("reviewReminder");
       const reviewDateField = document.getElementById("reviewDateField");
@@ -1807,7 +1944,7 @@
       }
 
       if (customRulesHint) {
-        customRulesHint.textContent = "Add anything else that matters — what to include, what to avoid, or who you would prefer not to attend.";
+        customRulesHint.textContent = "Add anything else that matters — what to include, what to avoid, and those who really shouldn’t make the guest list? Over my dead body…..oh, wait";
       }
 
       reviewReminderLabel.textContent = "Give this another look later";
@@ -2018,6 +2155,10 @@
       const fd = new FormData(form);
 
       for (const [key, value] of fd.entries()) {
+        if (key === "restingPlacePhoto") {
+          return;
+        }
+
         if (key === "rules") {
           if (!data.rules) data.rules = [];
           data.rules.push(value);
@@ -2032,6 +2173,7 @@
         data[`${section}Items`] = getSoundItems(section);
       });
       data.personalMessages = collectPersonalMessages();
+      data.restingPlacePhotoData = document.getElementById("restingPlacePhotoPreview")?.dataset.photoData || "";
       data.currentStep = currentStep;
       data.tone = currentTone;
       return data;
@@ -2090,6 +2232,8 @@
         updatePhotoVideoLabel();
         updateLocationLabels();
         renderPersonalMessages(data.personalMessages || []);
+        setRestingPlacePhotoPreview(data.restingPlacePhotoData || "");
+        updateRestingPlaceFields();
         updateFinalPageLabels();
         updateReviewDateVisibility();
         currentStep = Number(data.currentStep || 1);
@@ -2118,6 +2262,8 @@
       updateFlowerDonationFields();
       updatePhotoVideoLabel();
       updateLocationLabels();
+      updateRestingPlaceFields();
+      setRestingPlacePhotoPreview("");
       renderPersonalMessages([]);
       updateFinalPageLabels();
       updateReviewDateVisibility();
@@ -2241,6 +2387,9 @@
 
       const cards = [
         makeCard("The occasion", `
+          <p><strong>Laid to rest:</strong> ${valueOrFallback(data.laidToRest)}</p>
+          <p><strong>Resting place:</strong> ${valueOrFallback(data.restingPlace)}</p>
+          ${data.restingPlacePhotoData ? `<img class="summary-photo" src="${escapeHtml(data.restingPlacePhotoData)}" alt="Resting place photo" />` : ""}
           <p><strong>Name:</strong> ${valueOrFallback(data.name)}</p>
           <p><strong>Occasion name:</strong> ${escapeHtml(title)}</p>
         `),
@@ -2362,6 +2511,18 @@
       }
     });
 
+    document.getElementById("laidToRest").addEventListener("change", () => {
+      updateRestingPlaceFields();
+      saveData(true);
+    });
+
+    document.getElementById("restingPlacePhoto").addEventListener("change", handleRestingPlacePhotoChange);
+    document.getElementById("removeRestingPlacePhotoBtn").addEventListener("click", () => {
+      document.getElementById("restingPlacePhoto").value = "";
+      setRestingPlacePhotoPreview("");
+      saveData(true);
+    });
+
     document.getElementById("name").addEventListener("input", () => {
       updateOccasionOptions();
       applyTone(currentTone);
@@ -2435,6 +2596,7 @@
     updatePhotoVideoLabel();
     updateLocationLabels();
     renderPersonalMessages();
+    updateRestingPlaceFields();
     updateFinalPageLabels();
     updateReviewDateVisibility();
     if (document.getElementById("partyLevel")) renderMoodOptions(2, false);
