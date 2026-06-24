@@ -140,6 +140,20 @@
       border-radius: 999px;
     }
 
+    .hero-eyebrow {
+      display: inline-block;
+      line-height: 1.35;
+      border-radius: 18px;
+      max-width: 680px;
+      letter-spacing: .04em;
+    }
+
+    .hero-eyebrow strong {
+      display: inline-block;
+      margin-top: 2px;
+      color: var(--teal-dark);
+    }
+
     h1, h2, h3 { margin-top: 0; line-height: 1.08; }
     h1 {
       max-width: 760px;
@@ -796,7 +810,7 @@
       display: grid;
       place-items: center;
       border-radius: 15px;
-      font-size: 1.35rem;
+      font-size: 1.55rem;
       margin-bottom: 18px;
       background: rgba(255,255,255,.76);
     }
@@ -1060,7 +1074,7 @@
 
     <main>
       <section class="hero" id="hero">
-        <span class="eyebrow">The kindest thing you can leave your loved ones: memories, not decisions.</span>
+        <span class="eyebrow hero-eyebrow">The kindest thing you can leave your loved ones:<br><strong>memories, not decisions.</strong></span>
         <h1>Your life. Your stories. Your send-off. Your final party.</h1>
         <p class="hero-copy">
           Put together the celebration you would actually want — your music, your people, your rules.
@@ -1087,28 +1101,28 @@
 
         <div class="tone-grid">
           <button type="button" class="tone-card classic" data-tone-choice="classic">
-            <span class="tone-icon">▤</span>
+            <span class="tone-icon">🕯️</span>
             <strong>Classic</strong>
             <p>Clear, professional and respectful. Straightforward wording with no jokes or playful comments.</p>
             <small>Thoughtful and to the point</small>
           </button>
 
           <button type="button" class="tone-card warm" data-tone-choice="warm">
-            <span class="tone-icon">♡</span>
+            <span class="tone-icon">💛</span>
             <strong>Warm</strong>
             <p>Friendly, reassuring and light-hearted, while keeping everything respectful.</p>
             <small>Soft, personal and uplifting</small>
           </button>
 
           <button type="button" class="tone-card myway" data-tone-choice="myway">
-            <span class="tone-icon">✦</span>
+            <span class="tone-icon">⭐</span>
             <strong>My Way</strong>
             <p>Relaxed, honest and more likely to make you smile as you work through the questions.</p>
             <small>Less doom, more you</small>
           </button>
 
           <button type="button" class="tone-card partystyle" data-tone-choice="partystyle">
-            <span class="tone-icon">★</span>
+            <span class="tone-icon">🎉</span>
             <strong>Party Style</strong>
             <p>Bright, upbeat and full of personality, with wording designed to make the planning feel more like a celebration.</p>
             <small>Bold, cheerful and unmistakably you</small>
@@ -1139,33 +1153,6 @@
             <p class="step-intro" id="step1Intro">Nothing too dramatic yet. Start with your name and a few simple questions to create the send-off that feels like you.</p>
 
             <div class="field-grid">
-              <div class="field full">
-                <label for="laidToRest">How would you like to be laid to rest? Earth or Ashes?</label>
-                <select id="laidToRest" name="laidToRest">
-                  <option value="">Choose one</option>
-                  <option value="Earth / buried">Earth / buried</option>
-                  <option value="Ashes / cremated">Ashes / cremated</option>
-                  <option value="Not sure yet">Not sure yet</option>
-                  <option value="Something else">Something else</option>
-                </select>
-              </div>
-
-              <div class="field full hidden" id="restingPlaceField">
-                <label for="restingPlace" id="restingPlaceLabel">Choose your forever resting place</label>
-                <span class="hint" id="restingPlaceHint">Add where you would like to be buried, where ashes should be scattered, or any special location people should know about.</span>
-                <textarea id="restingPlace" name="restingPlace" placeholder="Cemetery, family plot, favourite view, garden, beach, woodland, or exact instructions for ashes."></textarea>
-
-                <div class="photo-upload-wrap">
-                  <label for="restingPlacePhoto" id="restingPlacePhotoLabel">Optional location photo</label>
-                  <span class="hint">Upload a photo if it helps show the exact place you mean.</span>
-                  <input id="restingPlacePhoto" name="restingPlacePhoto" type="file" accept="image/*" />
-                  <div class="photo-preview hidden" id="restingPlacePhotoPreviewWrap">
-                    <img id="restingPlacePhotoPreview" alt="Resting place photo preview" />
-                    <button class="btn btn-danger mini" type="button" id="removeRestingPlacePhotoBtn">Remove photo</button>
-                  </div>
-                </div>
-              </div>
-
               <div class="field">
                 <label for="name">Your name</label>
                 <input id="name" name="name" placeholder="For example, Alex" />
@@ -1201,6 +1188,33 @@
             <p class="step-intro" id="step2Intro">This is the bit that makes it yours — the clothes, colours, photos, stories and whether people leave hungry afterwards.</p>
 
             <div class="field-grid">
+              <div class="field full">
+                <label for="laidToRest">How would you like to be laid to rest? Earth or Ashes?</label>
+                <select id="laidToRest" name="laidToRest">
+                  <option value="">Choose one</option>
+                  <option value="Earth / buried">Earth / buried</option>
+                  <option value="Ashes / cremated">Ashes / cremated</option>
+                  <option value="Not sure yet">Not sure yet</option>
+                  <option value="Something else">Something else</option>
+                </select>
+              </div>
+
+              <div class="field full hidden" id="restingPlaceField">
+                <label for="restingPlace" id="restingPlaceLabel">Choose your forever resting place</label>
+                <span class="hint" id="restingPlaceHint">Add where you would like to be buried, where ashes should be scattered, or any special location people should know about.</span>
+                <textarea id="restingPlace" name="restingPlace" placeholder="Cemetery, family plot, favourite view, garden, beach, woodland, or exact instructions for ashes."></textarea>
+
+                <div class="photo-upload-wrap">
+                  <label for="restingPlacePhoto" id="restingPlacePhotoLabel">Optional location photo</label>
+                  <span class="hint">Upload a photo if it helps show the exact place you mean.</span>
+                  <input id="restingPlacePhoto" name="restingPlacePhoto" type="file" accept="image/*" />
+                  <div class="photo-preview hidden" id="restingPlacePhotoPreviewWrap">
+                    <img id="restingPlacePhotoPreview" alt="Resting place photo preview" />
+                    <button class="btn btn-danger mini" type="button" id="removeRestingPlacePhotoBtn">Remove photo</button>
+                  </div>
+                </div>
+              </div>
+
               <div class="field full">
                 <label for="ceremonyLocation" id="ceremonyLocationLabel">Preferred ceremony location</label>
                 <input id="ceremonyLocation" name="ceremonyLocation" placeholder="Funeral home, crematorium, church, favourite place, or location notes..." />
@@ -1399,6 +1413,12 @@
               </div>
 
               <div class="field full">
+                <label for="trustedContacts" id="trustedContactsLabel">Trusted people this plan can be shared with</label>
+                <span class="hint" id="trustedContactsHint">Add the people you give consent for us to contact and send this plan to if it is ever needed. Include names, relationship and contact details.</span>
+                <textarea id="trustedContacts" name="trustedContacts" placeholder="Example: Lucy Smith — sister — 07700 000000 — lucy@email.com"></textarea>
+              </div>
+
+              <div class="field full">
                 <label for="organiserNotes">Private practical notes <span class="hint">(optional)</span></label>
                 <textarea id="organiserNotes" name="organiserNotes" placeholder="Anything else the organiser should know."></textarea>
               </div>
@@ -1409,7 +1429,7 @@
             <button type="button" class="btn btn-secondary" id="backBtn">Back</button>
             <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
           </div>
-          <div class="micro-copy" id="microCopy">Take your time. There are no wrong answers here.</div>
+          <div class="micro-copy" id="microCopy">Take your time. There are no wrong answers, and it’s okay not to complete every box.</div>
         </form>
       </section>
 
@@ -1667,7 +1687,7 @@
         if (element) element.placeholder = resolvePersonalText(text);
       });
 
-      document.getElementById("microCopy").textContent = resolvePersonalText(config.micro[currentStep - 1]);
+      document.getElementById("microCopy").textContent = "Take your time. There are no wrong answers, and it’s okay not to complete every box.";
       updatePhotoVideoLabel();
       updateLocationLabels();
       updateRestingPlaceFields();
@@ -1902,6 +1922,8 @@
       const personalMessagesHint = document.getElementById("personalMessagesHint");
       const finalMessageSupportNote = document.getElementById("finalMessageSupportNote");
       const customRulesHint = document.getElementById("customRulesHint");
+      const trustedContactsLabel = document.getElementById("trustedContactsLabel");
+      const trustedContactsHint = document.getElementById("trustedContactsHint");
 
       if (!usefulInfoLabel || !usefulInfoHint || !reviewReminderLabel || !reviewReminderHint) return;
 
@@ -1941,6 +1963,22 @@
       if (personalMessagesLabel && personalMessagesHint) {
         personalMessagesLabel.textContent = name === "you" ? "Personal messages for loved ones" : `${possessive.charAt(0).toUpperCase() + possessive.slice(1)} personal messages for loved ones`;
         personalMessagesHint.textContent = "Add private messages for specific people, if there is anything you would want them to directly hear from you.";
+      }
+
+      if (trustedContactsLabel && trustedContactsHint) {
+        if (currentTone === "classic") {
+          trustedContactsLabel.textContent = "Authorised people this plan may be shared with";
+          trustedContactsHint.textContent = "Add the people you give consent for us to contact and send this plan to if it is ever needed. Include names, relationship and contact details.";
+        } else if (currentTone === "warm") {
+          trustedContactsLabel.textContent = "Trusted people this plan can be shared with";
+          trustedContactsHint.textContent = "Add the people you trust to receive this plan if it is ever needed. Include their names, relationship and contact details.";
+        } else if (currentTone === "myway") {
+          trustedContactsLabel.textContent = "People who are allowed to receive this plan";
+          trustedContactsHint.textContent = "Add the people you are happy for us to contact and send this plan to if needed. Names, relationship and contact details are ideal.";
+        } else {
+          trustedContactsLabel.textContent = "VIP list for receiving this plan";
+          trustedContactsHint.textContent = "Add the trusted people who are allowed to receive this plan if needed — names, relationship and contact details.";
+        }
       }
 
       if (customRulesHint) {
@@ -2078,7 +2116,7 @@
         <input class="sound-text" placeholder="Add a title, name or details" value="${escapeHtml(item.text || "")}" />
         <button type="button" class="search-sound-btn">${searchLabelForType(item.type || "Song")}</button>
         ${removable ? `<button type="button" class="remove-sound-btn" aria-label="Remove">×</button>` : ""}
-        <input class="sound-link" placeholder="Optional: paste the exact YouTube or web link here" value="${escapeHtml(item.link || "")}" />
+        <input class="sound-link" placeholder="Optional: paste exact YouTube/web link" value="${escapeHtml(item.link || "")}" />
       `;
 
       const typeSelect = row.querySelector(".sound-type");
@@ -2316,7 +2354,7 @@
       });
       backBtn.style.visibility = currentStep === 1 ? "hidden" : "visible";
       nextBtn.textContent = currentStep === steps.length ? "Create my plan" : "Next";
-      document.getElementById("microCopy").textContent = resolvePersonalText(toneContent[currentTone].micro[currentStep - 1]);
+      document.getElementById("microCopy").textContent = "Take your time. There are no wrong answers, and it’s okay not to complete every box.";
       if (!skipSave) saveData(true);
     }
 
@@ -2387,13 +2425,13 @@
 
       const cards = [
         makeCard("The occasion", `
-          <p><strong>Laid to rest:</strong> ${valueOrFallback(data.laidToRest)}</p>
-          <p><strong>Resting place:</strong> ${valueOrFallback(data.restingPlace)}</p>
-          ${data.restingPlacePhotoData ? `<img class="summary-photo" src="${escapeHtml(data.restingPlacePhotoData)}" alt="Resting place photo" />` : ""}
           <p><strong>Name:</strong> ${valueOrFallback(data.name)}</p>
           <p><strong>Occasion name:</strong> ${escapeHtml(title)}</p>
         `),
         makeCard("Location, look and feel", `
+          <p><strong>Laid to rest:</strong> ${valueOrFallback(data.laidToRest)}</p>
+          <p><strong>Resting place:</strong> ${valueOrFallback(data.restingPlace)}</p>
+          ${data.restingPlacePhotoData ? `<img class="summary-photo" src="${escapeHtml(data.restingPlacePhotoData)}" alt="Resting place photo" />` : ""}
           <p><strong>Preferred ceremony location:</strong> ${valueOrFallback(data.ceremonyLocation)}</p>
           <p><strong>${currentTone === "partystyle" ? "Preferred final party location" : "Where should everyone head afterwards?"}:</strong> ${valueOrFallback(data.afterwardsLocation)}</p>
           <p><strong>Dress code:</strong> ${valueOrFallback(data.dressCode === "custom" ? data.customDressCode : data.dressCode)}</p>
@@ -2426,6 +2464,7 @@
           <p>${valueOrFallback(data.reviewReminder === "specific" ? "Specific date selected" : data.reviewReminder, "No review reminder selected")}</p>
           ${data.reviewDate?.trim() ? `<p><strong>Date:</strong> ${escapeHtml(data.reviewDate)}</p>` : ""}
         `),
+        makeCard("Trusted sharing contacts", `<p>${valueOrFallback(data.trustedContacts, "No trusted sharing contacts added")}</p>`),
         makeCard("Practical notes", `<p>${valueOrFallback(data.organiserNotes, "No private notes added")}</p>`)
       ];
 
