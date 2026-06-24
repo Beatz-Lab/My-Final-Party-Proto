@@ -1278,6 +1278,7 @@
                   <option>Donations</option>
                   <option>Both</option>
                   <option>Neither</option>
+                  <option>Something else entirely</option>
                 </select>
               </div>
 
@@ -1291,6 +1292,11 @@
                 <input id="charityDetails" name="charityDetails" placeholder="Charity name, cause, donation link, or any notes..." />
               </div>
 
+              <div class="field hidden" id="flowersOtherField">
+                <label for="flowersOther">Something else instead</label>
+                <input id="flowersOther" name="flowersOther" placeholder="Add what you would prefer instead of flowers or donations..." />
+              </div>
+
               <div class="field">
                 <label for="foodDrink">Food and drink afterwards</label>
                 <input id="foodDrink" name="foodDrink" placeholder="Buffet, curry, tea and cake, open bar..." />
@@ -1299,6 +1305,12 @@
               <div class="field full">
                 <label for="photoNotes" id="photoNotesLabel">Photos and videos</label>
                 <textarea id="photoNotes" name="photoNotes" placeholder="Use the holiday photos, include the old band footage, and avoid that passport photo at all costs."></textarea>
+              </div>
+
+              <div class="field full">
+                <label for="photoVideoUse">How would you like photos or videos to be used?</label>
+                <span class="hint">For example, a slideshow, a large framed photo, photos near the coffin, a memory table, a photo on the grave, or anything you definitely would or would not want.</span>
+                <textarea id="photoVideoUse" name="photoVideoUse" placeholder="Example: A slideshow during the service, one favourite photo beside the coffin, and a few printed photos on a memory table."></textarea>
               </div>
 
               <div class="field full">
@@ -2048,17 +2060,22 @@
       const selection = document.getElementById("flowers")?.value || "";
       const flowerField = document.getElementById("flowerDetailsField");
       const charityField = document.getElementById("charityDetailsField");
+      const otherField = document.getElementById("flowersOtherField");
       const flowerInput = document.getElementById("flowerDetails");
       const charityInput = document.getElementById("charityDetails");
+      const otherInput = document.getElementById("flowersOther");
 
       const showFlowers = selection === "Flowers" || selection === "Both";
       const showCharity = selection === "Donations" || selection === "Both";
+      const showOther = selection === "Something else entirely";
 
       if (flowerField) flowerField.classList.toggle("hidden", !showFlowers);
       if (charityField) charityField.classList.toggle("hidden", !showCharity);
+      if (otherField) otherField.classList.toggle("hidden", !showOther);
 
       if (!showFlowers && flowerInput) flowerInput.value = "";
       if (!showCharity && charityInput) charityInput.value = "";
+      if (!showOther && otherInput) otherInput.value = "";
     }
 
     function updateCustomDressCodeVisibility() {
@@ -2459,14 +2476,16 @@
           <p><strong>Colours / theme:</strong> ${valueOrFallback(data.colourTheme)}</p>
           <p><strong>Flowers / donations:</strong> ${valueOrFallback(data.flowers)}</p>
           ${data.flowerDetails?.trim() ? `<p><strong>Flower preferences:</strong> ${escapeHtml(data.flowerDetails)}</p>` : ""}
-          ${data.donationDetails?.trim() ? `<p><strong>Donation details:</strong> ${escapeHtml(data.donationDetails)}</p>` : ""}
+          ${data.charityDetails?.trim() ? `<p><strong>Charity / donation details:</strong> ${escapeHtml(data.charityDetails)}</p>` : ""}
+          ${data.flowersOther?.trim() ? `<p><strong>Something else instead:</strong> ${escapeHtml(data.flowersOther)}</p>` : ""}
         `),
         makeCard("Food, photos and memories", `
-          <p><strong>Food / drink:</strong> ${valueOrFallback(data.food)}</p>
+          <p><strong>Food / drink:</strong> ${valueOrFallback(data.foodDrink)}</p>
           <p><strong>Photos / videos:</strong> ${valueOrFallback(data.photoNotes)}</p>
-          <p><strong>Stories / memories:</strong> ${valueOrFallback(data.memoryStory)}</p>
+          <p><strong>How to use photos / videos:</strong> ${valueOrFallback(data.photoVideoUse)}</p>
+          <p><strong>Stories / memories:</strong> ${valueOrFallback(data.story)}</p>
         `),
-        makeCard("People involved", `<p>${valueOrFallback(data.peopleInvolved)}</p>`),
+        makeCard("People involved", `<p>${valueOrFallback(data.people)}</p>`),
         makeCard("How it will sound", renderSoundSummary(data)),
         makeCard("The wishes", `
           <p>${data.rules?.length ? data.rules.map(escapeHtml).join("<br>") : "No wishes selected"}</p>
