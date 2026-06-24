@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Final Party — Send-Off Planner</title>
+  <title>My Final Party — Strong Tone Colour Test</title>
   <style>
     :root {
-      --bg: #eef8ff;
+      --bg: #0f6f8f;
       --panel: #ffffff;
-      --ink: #20313a;
-      --muted: #64777f;
-      --teal: #3e8ca8;
-      --teal-dark: #2f6f86;
-      --coral: #f0b84b;
-      --gold: #ffe8a8;
-      --line: #d9e9f1;
-      --glow-a: rgba(62,140,168,.16);
-      --glow-b: rgba(240,184,75,.18);
-      --glow-c: rgba(255,232,168,.22);
-      --shadow: 0 16px 40px rgba(37, 73, 91, 0.13);
+      --ink: #102f44;
+      --muted: #405b6b;
+      --teal: #009bb2;
+      --teal-dark: #005f7d;
+      --coral: #ff5f4a;
+      --gold: #ffc928;
+      --line: #93d7e6;
+      --glow-a: rgba(0,155,178,.45);
+      --glow-b: rgba(255,95,74,.32);
+      --glow-c: rgba(255,201,40,.42);
+      --shadow: 0 22px 55px rgba(0, 38, 58, 0.24);
       --radius: 22px;
     }
 
@@ -29,10 +29,10 @@
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 14% 14%, var(--glow-a), transparent 30%),
-        radial-gradient(circle at 88% 18%, var(--glow-b), transparent 30%),
-        radial-gradient(circle at 58% 92%, var(--glow-c), transparent 34%),
-        var(--bg);
+        radial-gradient(circle at 12% 10%, rgba(255,201,40,.55), transparent 26%),
+        radial-gradient(circle at 88% 6%, rgba(255,95,74,.45), transparent 28%),
+        radial-gradient(circle at 92% 84%, rgba(118,225,210,.42), transparent 28%),
+        linear-gradient(135deg, #08799b 0%, #11a0b4 45%, #ffd65a 100%);
       min-height: 100vh;
     }
 
@@ -1069,7 +1069,333 @@
       .summary-cover { border-radius: 0; }
       .summary-body { padding: 28px; }
     }
-  </style>
+  
+
+    /* v56 stronger colour test - tone reactive, no warning yellow boxes */
+    body {
+      background:
+        radial-gradient(circle at 12% 10%, rgba(118,225,210,.42), transparent 26%),
+        radial-gradient(circle at 88% 6%, rgba(255,95,74,.36), transparent 28%),
+        radial-gradient(circle at 92% 84%, rgba(180,118,255,.30), transparent 28%),
+        linear-gradient(135deg, #08799b 0%, #11a0b4 58%, #6edbd0 100%) !important;
+    }
+
+    body.tone-classic {
+      background:
+        radial-gradient(circle at 12% 10%, rgba(181,211,230,.42), transparent 28%),
+        radial-gradient(circle at 88% 8%, rgba(212,176,92,.32), transparent 26%),
+        linear-gradient(135deg, #203a52 0%, #4d7897 56%, #d8b86a 100%) !important;
+    }
+
+    body.tone-warm {
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255,173,135,.42), transparent 28%),
+        radial-gradient(circle at 86% 8%, rgba(112,184,157,.40), transparent 30%),
+        linear-gradient(135deg, #3e8f78 0%, #76b79d 52%, #ffb38f 100%) !important;
+    }
+
+    body.tone-myway {
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255,116,148,.40), transparent 28%),
+        radial-gradient(circle at 88% 8%, rgba(191,116,255,.42), transparent 30%),
+        linear-gradient(135deg, #563272 0%, #9b5fc4 52%, #ff7e9d 100%) !important;
+    }
+
+    body.tone-partystyle {
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255,137,96,.46), transparent 28%),
+        radial-gradient(circle at 88% 8%, rgba(184,92,255,.42), transparent 30%),
+        radial-gradient(circle at 50% 92%, rgba(255,120,190,.34), transparent 30%),
+        linear-gradient(135deg, #ff6f63 0%, #d75ee8 54%, #794bff 100%) !important;
+    }
+
+    .app-header {
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(255,255,255,.55);
+      box-shadow: 0 14px 36px rgba(0, 38, 58, .16);
+      backdrop-filter: blur(18px);
+    }
+
+    .shell {
+      background: rgba(255,255,255,.96);
+      border: 1px solid rgba(255,255,255,.68);
+      box-shadow: 0 28px 70px rgba(0, 38, 58, .28);
+    }
+
+    .hero-card {
+      background:
+        radial-gradient(circle at 85% 10%, rgba(118,225,210,.18), transparent 28%),
+        linear-gradient(145deg, #ffffff 0%, #e8fbff 100%);
+      border: 1px solid rgba(0, 95, 125, .20);
+      box-shadow: 0 20px 50px rgba(0, 95, 125, .16);
+    }
+
+    body.tone-classic .hero-card,
+    body.tone-classic .step {
+      background:
+        radial-gradient(circle at 90% 8%, rgba(212,176,92,.14), transparent 26%),
+        linear-gradient(145deg, #ffffff 0%, #eef5fa 100%) !important;
+    }
+
+    body.tone-warm .hero-card,
+    body.tone-warm .step {
+      background:
+        radial-gradient(circle at 90% 8%, rgba(255,173,135,.16), transparent 26%),
+        linear-gradient(145deg, #ffffff 0%, #f0fbf5 100%) !important;
+    }
+
+    body.tone-myway .hero-card,
+    body.tone-myway .step {
+      background:
+        radial-gradient(circle at 90% 8%, rgba(255,116,148,.14), transparent 26%),
+        linear-gradient(145deg, #ffffff 0%, #fbf2ff 100%) !important;
+    }
+
+    body.tone-partystyle .hero-card,
+    body.tone-partystyle .step {
+      background:
+        radial-gradient(circle at 90% 8%, rgba(255,111,99,.16), transparent 26%),
+        linear-gradient(145deg, #ffffff 0%, #fff2fb 100%) !important;
+    }
+
+    .hero-card h1,
+    .step h1,
+    .step h2 {
+      color: #102f44;
+    }
+
+    .eyebrow,
+    .hero-eyebrow {
+      background: linear-gradient(135deg, #dff8ff, #d7f7f2) !important;
+      color: #102f44 !important;
+      border: 1px solid rgba(0,155,178,.22);
+      box-shadow: 0 8px 20px rgba(0,155,178,.12);
+    }
+
+    body.tone-classic .eyebrow,
+    body.tone-classic .hero-eyebrow {
+      background: linear-gradient(135deg, #eef5fa, #f7efe0) !important;
+      border-color: rgba(74,104,128,.24);
+    }
+
+    body.tone-warm .eyebrow,
+    body.tone-warm .hero-eyebrow {
+      background: linear-gradient(135deg, #e9f8ef, #ffe2d3) !important;
+      border-color: rgba(62,143,120,.22);
+    }
+
+    body.tone-myway .eyebrow,
+    body.tone-myway .hero-eyebrow {
+      background: linear-gradient(135deg, #f5e8ff, #ffe3ec) !important;
+      border-color: rgba(155,95,196,.24);
+    }
+
+    body.tone-partystyle .eyebrow,
+    body.tone-partystyle .hero-eyebrow {
+      background: linear-gradient(135deg, #ffe4dc, #f2d7ff) !important;
+      border-color: rgba(255,111,99,.26);
+    }
+
+    .brand-mark,
+    .brand-logo {
+      background: #ffffff !important;
+      border: 1px solid rgba(0,95,125,.18);
+      box-shadow: 0 10px 24px rgba(0, 38, 58, .20);
+    }
+
+    .tone-card {
+      border-width: 2px;
+      box-shadow: 0 16px 36px rgba(0, 38, 58, .12);
+    }
+
+    .tone-card.classic {
+      background: linear-gradient(145deg, #ffffff 0%, #dff4ff 100%) !important;
+      border-color: #85cce0 !important;
+    }
+
+    .tone-card.warm {
+      background: linear-gradient(145deg, #e9f8ef 0%, #ffd8c8 100%) !important;
+      border-color: #72b99f !important;
+    }
+
+    .tone-card.myway {
+      background: linear-gradient(145deg, #f4deff 0%, #ffd6e5 100%) !important;
+      border-color: #c994e9 !important;
+    }
+
+    .tone-card.partystyle {
+      background: linear-gradient(145deg, #ffb86b 0%, #ff7f78 52%, #b85cff 100%) !important;
+      border-color: #ff6f63 !important;
+      color: #182635;
+    }
+
+    .tone-card.selected,
+    .tone-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 48px rgba(0, 38, 58, .20);
+    }
+
+    .tone-icon {
+      background: rgba(255,255,255,.72) !important;
+      border: 1px solid rgba(255,255,255,.75);
+      box-shadow: 0 8px 22px rgba(0, 38, 58, .12);
+      font-size: 1.65rem;
+      line-height: 1;
+    }
+
+    .primary-btn,
+    button.primary,
+    .button-primary {
+      background: linear-gradient(135deg, #009bb2, #005f7d) !important;
+      color: #ffffff !important;
+      box-shadow: 0 14px 28px rgba(0, 95, 125, .24);
+    }
+
+    body.tone-classic .primary-btn,
+    body.tone-classic button.primary,
+    body.tone-classic .button-primary,
+    body.tone-classic .nav-pill.active,
+    body.tone-classic .progress-pill.active {
+      background: linear-gradient(135deg, #203a52, #4d7897) !important;
+    }
+
+    body.tone-warm .primary-btn,
+    body.tone-warm button.primary,
+    body.tone-warm .button-primary,
+    body.tone-warm .nav-pill.active,
+    body.tone-warm .progress-pill.active {
+      background: linear-gradient(135deg, #3e8f78, #76b79d) !important;
+    }
+
+    body.tone-myway .primary-btn,
+    body.tone-myway button.primary,
+    body.tone-myway .button-primary,
+    body.tone-myway .nav-pill.active,
+    body.tone-myway .progress-pill.active {
+      background: linear-gradient(135deg, #563272, #9b5fc4) !important;
+    }
+
+    body.tone-partystyle .primary-btn,
+    body.tone-partystyle button.primary,
+    body.tone-partystyle .button-primary,
+    body.tone-partystyle .nav-pill.active,
+    body.tone-partystyle .progress-pill.active {
+      background: linear-gradient(135deg, #ff6f63, #b85cff) !important;
+    }
+
+    .nav-pill.active,
+    .progress-pill.active {
+      background: linear-gradient(135deg, #005f7d, #009bb2) !important;
+      color: #ffffff !important;
+    }
+
+    .progress-pill.done {
+      background: #dff8ff !important;
+      color: #005f7d !important;
+      border-color: rgba(0,155,178,.22) !important;
+    }
+
+    body.tone-classic .progress-pill.done {
+      background: #eef5fa !important;
+      color: #203a52 !important;
+      border-color: rgba(74,104,128,.22) !important;
+    }
+
+    body.tone-warm .progress-pill.done {
+      background: #e9f8ef !important;
+      color: #2f6f5e !important;
+      border-color: rgba(62,143,120,.22) !important;
+    }
+
+    body.tone-myway .progress-pill.done {
+      background: #f5e8ff !important;
+      color: #563272 !important;
+      border-color: rgba(155,95,196,.24) !important;
+    }
+
+    body.tone-partystyle .progress-pill.done {
+      background: #ffe4dc !important;
+      color: #903d7c !important;
+      border-color: rgba(255,111,99,.24) !important;
+    }
+
+    .step {
+      background:
+        radial-gradient(circle at 92% 8%, rgba(118,225,210,.12), transparent 24%),
+        linear-gradient(145deg, #ffffff 0%, #f0fbff 100%) !important;
+      border: 1px solid rgba(0, 95, 125, .20) !important;
+      box-shadow: 0 20px 50px rgba(0, 38, 58, .16) !important;
+    }
+
+    input,
+    textarea,
+    select {
+      background: #ffffff !important;
+      border-color: #9fd8e5 !important;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #009bb2 !important;
+      box-shadow: 0 0 0 4px rgba(0,155,178,.18) !important;
+    }
+
+    .micro-copy {
+      background: linear-gradient(135deg, #dff8ff, #e4fbff) !important;
+      color: #102f44 !important;
+      border: 1px solid rgba(0,155,178,.22) !important;
+      padding: 11px 14px;
+      border-radius: 15px;
+      font-weight: 700;
+    }
+
+    body.tone-classic .micro-copy {
+      background: linear-gradient(135deg, #eef5fa, #ffffff) !important;
+      border-color: rgba(74,104,128,.22) !important;
+    }
+
+    body.tone-warm .micro-copy {
+      background: linear-gradient(135deg, #e9f8ef, #fff6f0) !important;
+      border-color: rgba(62,143,120,.22) !important;
+    }
+
+    body.tone-myway .micro-copy {
+      background: linear-gradient(135deg, #f5e8ff, #fff1f6) !important;
+      border-color: rgba(155,95,196,.22) !important;
+    }
+
+    body.tone-partystyle .micro-copy {
+      background: linear-gradient(135deg, #ffe4dc, #f2d7ff) !important;
+      border-color: rgba(255,111,99,.22) !important;
+    }
+
+    @media (max-width: 760px) {
+      body {
+        background:
+          radial-gradient(circle at 8% 5%, rgba(118,225,210,.40), transparent 30%),
+          radial-gradient(circle at 92% 0%, rgba(255,95,74,.32), transparent 34%),
+          linear-gradient(135deg, #08799b 0%, #11a0b4 58%, #6edbd0 100%) !important;
+      }
+
+      body.tone-classic {
+        background: linear-gradient(135deg, #203a52 0%, #4d7897 58%, #d8b86a 100%) !important;
+      }
+
+      body.tone-warm {
+        background: linear-gradient(135deg, #3e8f78 0%, #76b79d 58%, #ffb38f 100%) !important;
+      }
+
+      body.tone-myway {
+        background: linear-gradient(135deg, #563272 0%, #9b5fc4 58%, #ff7e9d 100%) !important;
+      }
+
+      body.tone-partystyle {
+        background: linear-gradient(135deg, #ff6f63 0%, #d75ee8 54%, #794bff 100%) !important;
+      }
+    }
+
+</style>
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -1699,6 +2025,11 @@
     }
 
     function applyTone(tone) {
+      document.body.classList.remove("tone-classic", "tone-warm", "tone-myway", "tone-partystyle");
+      if (tone && tone !== "home") {
+        document.body.classList.add(`tone-${tone}`);
+      }
+
       currentTone = toneContent[tone] ? tone : "warm";
       document.body.dataset.tone = currentTone;
 
@@ -2347,6 +2678,7 @@
     }
 
     function showHome() {
+      document.body.classList.remove("tone-classic", "tone-warm", "tone-myway", "tone-partystyle");
       hero.classList.remove("hidden");
       tonePicker.classList.add("hidden");
       wizard.classList.add("hidden");
