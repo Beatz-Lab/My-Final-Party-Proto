@@ -1395,7 +1395,70 @@
       }
     }
 
-</style>
+
+    /* v58 mobile header readability fixes */
+    .saved-note,
+    .save-note,
+    .autosave-note,
+    .device-save-note,
+    .progress-save-note {
+      color: rgba(255,255,255,.92) !important;
+      text-shadow: 0 2px 8px rgba(0, 38, 58, .34);
+      font-weight: 700;
+    }
+
+    .app-header .muted,
+    .app-header .hint,
+    .app-header small {
+      color: rgba(16,47,68,.78);
+    }
+
+    @media (max-width: 760px) {
+      .app-header {
+        align-items: flex-start;
+        gap: 14px;
+      }
+
+      .brand {
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .brand-text,
+      .brand-copy,
+      .brand-details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 7px;
+      }
+
+      .tone-badge,
+      .tone-change,
+      .current-tone,
+      .change-tone,
+      #currentToneBadge,
+      #toneChangeButton {
+        margin-top: 8px !important;
+      }
+
+      .app-header [class*="saved"],
+      .app-header [id*="saved"],
+      .app-header [class*="save"],
+      .app-header [id*="save"] {
+        color: rgba(255,255,255,.92) !important;
+        text-shadow: 0 2px 8px rgba(0, 38, 58, .34);
+        font-weight: 700;
+      }
+
+      .app-header nav,
+      .top-nav,
+      .header-nav {
+        margin-top: 10px;
+      }
+    }
+
+  </style>
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
