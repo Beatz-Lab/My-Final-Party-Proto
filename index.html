@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Final Party — Tone Popup Layout Fix</title>
+  <title>My Final Party — Create Plan Button Fix</title>
   <style>
     :root {
       --bg: #0f6f8f;
@@ -1621,12 +1621,15 @@
 
     body.tone-partystyle::before {
       background-image:
-        radial-gradient(circle at 25px 35px, rgba(255,255,255,.62) 0 4px, transparent 5px),
-        radial-gradient(circle at 105px 95px, rgba(255,255,255,.46) 0 5px, transparent 6px),
-        linear-gradient(25deg, transparent 0 45%, rgba(255,255,255,.28) 46% 49%, transparent 50% 100%),
-        linear-gradient(115deg, transparent 0 46%, rgba(255,255,255,.22) 47% 49%, transparent 50% 100%);
-      background-size: 130px 130px, 175px 175px, 155px 155px, 210px 210px;
-      opacity: .36;
+        radial-gradient(circle at 18px 24px, rgba(255,255,255,.72) 0 4px, transparent 5px),
+        radial-gradient(circle at 88px 36px, rgba(255,255,255,.55) 0 3px, transparent 4px),
+        radial-gradient(circle at 44px 102px, rgba(255,255,255,.48) 0 3px, transparent 4px),
+        linear-gradient(32deg, transparent 0 44%, rgba(255,255,255,.42) 45% 49%, transparent 50% 100%),
+        linear-gradient(118deg, transparent 0 45%, rgba(255,255,255,.38) 46% 50%, transparent 51% 100%),
+        linear-gradient(78deg, transparent 0 46%, rgba(255,255,255,.28) 47% 49%, transparent 50% 100%);
+      background-size: 92px 92px, 128px 128px, 146px 146px, 110px 110px, 140px 140px, 170px 170px;
+      opacity: .52;
+      mix-blend-mode: soft-light;
     }
 
     .hero-card,
@@ -1810,6 +1813,104 @@
 
       .tone-switcher .tone-card {
         min-height: 0 !important;
+      }
+    }
+
+  
+    /* v69: add breathing space inside question panels
+    /* v70: party style background updated to a clearer confetti motif */ */
+    .step {
+      padding: clamp(28px, 4vw, 46px) !important;
+      border-radius: 28px !important;
+      overflow: hidden;
+    }
+
+    .step > h1,
+    .step > h2,
+    .step > p,
+    .step .field-grid,
+    .step .field,
+    .step .info-note,
+    .step .micro-copy {
+      max-width: 100%;
+    }
+
+    .step > h1,
+    .step > h2 {
+      margin-top: 0 !important;
+    }
+
+    .field-grid {
+      margin-top: 28px;
+    }
+
+    .info-note,
+    .micro-copy {
+      margin-top: 26px;
+    }
+
+    @media (max-width: 760px) {
+      .step {
+        padding: 24px 20px 30px !important;
+        border-radius: 24px !important;
+      }
+
+      .field-grid {
+        margin-top: 22px;
+      }
+    }
+
+  
+    /* v71: re-apply question panel breathing space after confetti update */
+    .wizard .step,
+    main .step,
+    section.step {
+      padding: clamp(32px, 4.5vw, 54px) !important;
+      border-radius: 28px !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
+
+    .wizard .step > h1,
+    .wizard .step > h2,
+    .wizard .step > p,
+    main .step > h1,
+    main .step > h2,
+    main .step > p {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    .wizard .step > h1,
+    .wizard .step > h2,
+    main .step > h1,
+    main .step > h2 {
+      margin-top: 0 !important;
+    }
+
+    .wizard .step .field-grid,
+    main .step .field-grid {
+      margin-top: 30px !important;
+    }
+
+    .wizard .step .info-note,
+    .wizard .step .micro-copy,
+    main .step .info-note,
+    main .step .micro-copy {
+      margin-top: 28px !important;
+    }
+
+    @media (max-width: 760px) {
+      .wizard .step,
+      main .step,
+      section.step {
+        padding: 26px 22px 32px !important;
+        border-radius: 24px !important;
+      }
+
+      .wizard .step .field-grid,
+      main .step .field-grid {
+        margin-top: 24px !important;
       }
     }
 
@@ -2985,7 +3086,7 @@
 
       for (const [key, value] of fd.entries()) {
         if (key === "restingPlacePhoto") {
-          return;
+          continue;
         }
 
         if (key === "rules") {
@@ -3010,6 +3111,7 @@
 
     function saveData(silent = true) {
       const data = getData();
+      if (!data) return;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
       saveState.textContent = "Progress saved on this device";
       if (!silent) showToast("Progress saved");
@@ -3193,6 +3295,10 @@
     function generateSummary() {
       saveData(true);
       const data = getData();
+      if (!data) {
+        showToast("Something went wrong creating the plan. Please try again.");
+        return;
+      }
       const name = data.name?.trim() || "My";
       const possessive = name === "My" ? "My" : possessiveName(name);
       const title = (data.occasionName === "custom" && data.customTitle?.trim())
