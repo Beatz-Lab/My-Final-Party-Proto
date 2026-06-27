@@ -1458,6 +1458,119 @@
       }
     }
 
+  
+    /* v59 header helper text contrast fix */
+    .app-header {
+      color: #102f44 !important;
+    }
+
+    .app-header p,
+    .app-header span,
+    .app-header small,
+    .app-header .muted,
+    .app-header .hint,
+    .app-header .status,
+    .app-header .save-status,
+    .app-header .saved-status,
+    .app-header .saved-note,
+    .app-header .save-note,
+    .app-header .autosave-note,
+    .app-header .device-save-note,
+    .app-header .progress-save-note,
+    .app-header [class*="saved"],
+    .app-header [id*="saved"],
+    .app-header [class*="save"],
+    .app-header [id*="save"] {
+      color: #102f44 !important;
+      text-shadow: none !important;
+      opacity: 1 !important;
+      font-weight: 700;
+    }
+
+    .app-header .brand-subtitle,
+    .app-header .brand-tagline,
+    .app-header .header-subtitle,
+    .app-header .header-note,
+    .app-header .helper-text {
+      color: #102f44 !important;
+      text-shadow: none !important;
+      opacity: 1 !important;
+      font-weight: 700;
+    }
+
+    @media (max-width: 760px) {
+      .app-header p,
+      .app-header span,
+      .app-header small,
+      .app-header .muted,
+      .app-header .hint,
+      .app-header [class*="saved"],
+      .app-header [id*="saved"],
+      .app-header [class*="save"],
+      .app-header [id*="save"] {
+        color: #102f44 !important;
+        text-shadow: none !important;
+        opacity: 1 !important;
+      }
+    }
+
+  
+    /* v60 exact header/status contrast fix */
+    #saveState,
+    .save-state,
+    .saved-state,
+    .save-status,
+    .saved-status,
+    .header-status,
+    .header-helper,
+    .top-copy,
+    .top-copy p,
+    .top-copy span,
+    .app-header .top-copy,
+    .app-header .top-copy p,
+    .app-header .top-copy span {
+      color: #102f44 !important;
+      opacity: 1 !important;
+      text-shadow: none !important;
+      font-weight: 800 !important;
+    }
+
+    .app-header {
+      color: #102f44 !important;
+    }
+
+    .app-header p,
+    .app-header span:not(.tone-icon),
+    .app-header small,
+    .app-header .muted,
+    .app-header .hint,
+    .app-header .subtle {
+      color: #102f44 !important;
+      opacity: 1 !important;
+      text-shadow: none !important;
+    }
+
+    @media (max-width: 760px) {
+      #saveState,
+    .save-state,
+    .saved-state,
+    .save-status,
+    .saved-status,
+    .header-status,
+    .header-helper,
+    .top-copy,
+    .top-copy p,
+    .top-copy span,
+    .app-header .top-copy,
+    .app-header .top-copy p,
+    .app-header .top-copy span {
+        color: #102f44 !important;
+        opacity: 1 !important;
+        text-shadow: none !important;
+        font-weight: 800 !important;
+      }
+    }
+
   </style>
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -1478,7 +1591,7 @@
       </div>
       <div class="topbar-actions">
         <button class="home-btn" id="homeBtn" type="button" aria-label="Return to home">⌂ Home</button>
-        <div class="save-state" id="saveState">Saved only on this device</div>
+        <div class="save-state header-status" id="saveState">Saved only on this device</div>
       </div>
     </header>
 
