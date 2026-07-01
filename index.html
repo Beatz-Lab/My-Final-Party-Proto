@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Final Party — Create Plan Button Fix</title>
+  <title>My Final Party — Travel Question and Microcopy Position Fix</title>
   <style>
     :root {
       --bg: #0f6f8f;
@@ -1914,6 +1914,22 @@
       }
     }
 
+  
+    /* v73: pale pink tone heart */
+    .tone-card.warm .tone-icon {
+      color: #f6a9c8 !important;
+    }
+
+  
+    /* v73: micro-copy now appears above the questions */
+    .step > .micro-copy {
+      margin: 22px 0 28px !important;
+    }
+
+    .nav-row + .micro-copy {
+      display: none;
+    }
+
   </style>
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -1974,7 +1990,7 @@
           </button>
 
           <button type="button" class="tone-card warm" data-tone-choice="warm">
-            <span class="tone-icon">💛</span>
+            <span class="tone-icon">🩷</span>
             <strong>Warm</strong>
             <p>Friendly, reassuring and light-hearted, while keeping everything respectful.</p>
             <small>Soft, personal and uplifting</small>
@@ -2084,6 +2100,11 @@
               <div class="field full">
                 <label for="ceremonyLocation" id="ceremonyLocationLabel">Preferred ceremony location</label>
                 <input id="ceremonyLocation" name="ceremonyLocation" placeholder="Funeral home, crematorium, church, favourite place, or location notes..." />
+              </div>
+
+              <div class="field full">
+                <label for="travelTransport">Travel and funeral cars</label>
+                <textarea id="travelTransport" name="travelTransport" placeholder="For example: funeral cars, limousines, family cars, people making their own way, accessible transport, walking behind the hearse, special vehicle requests, or no formal transport needed."></textarea>
               </div>
 
               <div class="field full">
@@ -2356,7 +2377,7 @@
         </button>
 
         <button type="button" class="tone-card warm" data-switch-tone="warm">
-          <span class="tone-icon">💛</span>
+          <span class="tone-icon">🩷</span>
           <strong>Warm</strong>
           <p>Friendly, reassuring and light-hearted, while keeping everything respectful.</p>
           <small>Soft, personal and uplifting</small>
@@ -3238,6 +3259,20 @@
         step.classList.toggle("hidden", Number(step.dataset.step) !== currentStep);
       });
 
+      const activeStep = steps.find(step => Number(step.dataset.step) === currentStep);
+      const microCopyElement = document.getElementById("microCopy");
+      if (activeStep && microCopyElement) {
+        microCopyElement.textContent = "Take your time. There are no wrong answers, and it’s okay not to complete every box.";
+        const insertBeforeTarget =
+          activeStep.querySelector(".field-grid") ||
+          activeStep.querySelector(".sound-builder") ||
+          activeStep.querySelector(".check-list") ||
+          activeStep.querySelector(".repeat-list") ||
+          activeStep.children[2] ||
+          null;
+        activeStep.insertBefore(microCopyElement, insertBeforeTarget);
+      }
+
       progressFill.style.width = `${(currentStep / steps.length) * 100}%`;
       progressCount.textContent = `${currentStep} of ${steps.length}`;
 
@@ -3248,7 +3283,6 @@
       });
       backBtn.style.visibility = currentStep === 1 ? "hidden" : "visible";
       nextBtn.textContent = currentStep === steps.length ? "Create my plan" : "Next";
-      document.getElementById("microCopy").textContent = "Take your time. There are no wrong answers, and it’s okay not to complete every box.";
       if (!skipSave) saveData(true);
     }
 
@@ -3331,6 +3365,7 @@
           <p><strong>Resting place:</strong> ${valueOrFallback(data.restingPlace)}</p>
           ${data.restingPlacePhotoData ? `<img class="summary-photo" src="${escapeHtml(data.restingPlacePhotoData)}" alt="Resting place photo" />` : ""}
           <p><strong>Preferred ceremony location:</strong> ${valueOrFallback(data.ceremonyLocation)}</p>
+          <p><strong>Travel and funeral cars:</strong> ${valueOrFallback(data.travelTransport, "No travel or funeral car details added")}</p>
           <p><strong>${currentTone === "partystyle" ? "Preferred final party location" : "Where should everyone head afterwards?"}:</strong> ${valueOrFallback(data.afterwardsLocation)}</p>
           <p><strong>Dress code:</strong> ${valueOrFallback(data.dressCode === "custom" ? data.customDressCode : data.dressCode)}</p>
           <p><strong>Colours / theme:</strong> ${valueOrFallback(data.colourTheme)}</p>
