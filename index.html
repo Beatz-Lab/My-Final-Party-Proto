@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Final Party — Sound Mobile Fit Only Fix</title>
+  <title>My Final Party — Mobile Field Height Fix</title>
   <style>
     :root {
       --bg: #0f6f8f;
@@ -1973,6 +1973,47 @@
         width: 100% !important;
         max-width: 100% !important;
         justify-content: center !important;
+      }
+    }
+
+  
+    /* v76: mobile form fields need enough height for larger placeholder text */
+    @media (max-width: 760px) {
+      .field input,
+      .field select {
+        min-height: 66px !important;
+        height: auto !important;
+        padding-top: 18px !important;
+        padding-bottom: 18px !important;
+        line-height: 1.35 !important;
+        box-sizing: border-box !important;
+      }
+
+      .field textarea {
+        min-height: 118px !important;
+        height: auto !important;
+        padding-top: 18px !important;
+        padding-bottom: 18px !important;
+        line-height: 1.35 !important;
+        box-sizing: border-box !important;
+        overflow-y: auto !important;
+      }
+
+      .field input::placeholder,
+      .field textarea::placeholder {
+        line-height: 1.35 !important;
+      }
+
+      #travelTransport {
+        min-height: 150px !important;
+      }
+
+      #afterwardsLocation,
+      #colourTheme,
+      #foodDrink,
+      #photoNotes,
+      #photoVideoUse {
+        min-height: 82px !important;
       }
     }
 
