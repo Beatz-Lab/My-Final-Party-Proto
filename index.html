@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Final Party — Basics Microcopy and Mobile Sound Fix</title>
+  <title>My Final Party — Sound Mobile Fit Only Fix</title>
   <style>
     :root {
       --bg: #0f6f8f;
@@ -1931,7 +1931,7 @@
     }
 
   
-    /* v74: reliable pale pink heart + mobile sound field fit */
+    /* v75: proper pale pink Warm tone heart only */
     .tone-card.warm .warm-heart-icon {
       color: #f3a6c5 !important;
       font-family: Georgia, "Times New Roman", serif !important;
@@ -1940,41 +1940,39 @@
       font-weight: 700 !important;
     }
 
+  
+    /* v75: Sound page mobile fit only */
     @media (max-width: 760px) {
-      .sound-item,
-      .sound-row,
-      .sound-builder,
-      .sound-section,
-      .song-row {
-        max-width: 100% !important;
-        min-width: 0 !important;
-        box-sizing: border-box !important;
-      }
-
-      .sound-item input,
-      .sound-item select,
-      .sound-item textarea,
-      .sound-row input,
-      .sound-row select,
-      .sound-row textarea,
-      .sound-builder input,
-      .sound-builder select,
-      .sound-builder textarea {
+      [data-step="3"] .sound-item,
+      [data-step="3"] .sound-row {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
         width: 100% !important;
         max-width: 100% !important;
         min-width: 0 !important;
         box-sizing: border-box !important;
       }
 
-      .sound-item,
-      .sound-row {
-        grid-template-columns: 1fr !important;
+      [data-step="3"] .sound-item input,
+      [data-step="3"] .sound-item select,
+      [data-step="3"] .sound-item textarea,
+      [data-step="3"] .sound-row input,
+      [data-step="3"] .sound-row select,
+      [data-step="3"] .sound-row textarea {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
       }
 
-      input::placeholder,
-      textarea::placeholder {
-        white-space: normal;
-        text-overflow: ellipsis;
+      [data-step="3"] .sound-item .btn,
+      [data-step="3"] .sound-row .btn,
+      [data-step="3"] .search-link-btn,
+      [data-step="3"] .remove-sound-btn {
+        width: 100% !important;
+        max-width: 100% !important;
+        justify-content: center !important;
       }
     }
 
@@ -3631,18 +3629,17 @@
     if (document.getElementById("partyLevel")) renderMoodOptions(2, false);
     function updateMobileSoundPlaceholders() {
       const isMobile = window.matchMedia("(max-width: 760px)").matches;
-      document.querySelectorAll(".sound-text").forEach(input => {
+      document.querySelectorAll('[data-step="3"] .sound-text').forEach(input => {
         input.placeholder = isMobile ? "Title, artist or details" : "Song title, artist, hymn, poem, psalm, reading or details";
       });
-      document.querySelectorAll(".sound-link").forEach(input => {
+      document.querySelectorAll('[data-step="3"] .sound-link').forEach(input => {
         input.placeholder = isMobile ? "Optional link" : "Optional: paste exact YouTube/web link";
       });
     }
 
-    updateMobileSoundPlaceholders();
-    window.addEventListener("resize", updateMobileSoundPlaceholders);
     initialiseSoundSections();
     updateMobileSoundPlaceholders();
+    window.addEventListener("resize", updateMobileSoundPlaceholders);
     hero.classList.remove("hidden");
     tonePicker.classList.add("hidden");
     wizard.classList.add("hidden");
