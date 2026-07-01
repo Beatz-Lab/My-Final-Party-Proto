@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Final Party — Travel Question and Microcopy Position Fix</title>
+  <title>My Final Party — Basics Microcopy and Mobile Sound Fix</title>
   <style>
     :root {
       --bg: #0f6f8f;
@@ -1930,6 +1930,54 @@
       display: none;
     }
 
+  
+    /* v74: reliable pale pink heart + mobile sound field fit */
+    .tone-card.warm .warm-heart-icon {
+      color: #f3a6c5 !important;
+      font-family: Georgia, "Times New Roman", serif !important;
+      font-size: 2.15rem !important;
+      line-height: 1 !important;
+      font-weight: 700 !important;
+    }
+
+    @media (max-width: 760px) {
+      .sound-item,
+      .sound-row,
+      .sound-builder,
+      .sound-section,
+      .song-row {
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+      }
+
+      .sound-item input,
+      .sound-item select,
+      .sound-item textarea,
+      .sound-row input,
+      .sound-row select,
+      .sound-row textarea,
+      .sound-builder input,
+      .sound-builder select,
+      .sound-builder textarea {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+      }
+
+      .sound-item,
+      .sound-row {
+        grid-template-columns: 1fr !important;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        white-space: normal;
+        text-overflow: ellipsis;
+      }
+    }
+
   </style>
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -1990,7 +2038,7 @@
           </button>
 
           <button type="button" class="tone-card warm" data-tone-choice="warm">
-            <span class="tone-icon">🩷</span>
+            <span class="tone-icon warm-heart-icon">♥</span>
             <strong>Warm</strong>
             <p>Friendly, reassuring and light-hearted, while keeping everything respectful.</p>
             <small>Soft, personal and uplifting</small>
@@ -2377,7 +2425,7 @@
         </button>
 
         <button type="button" class="tone-card warm" data-switch-tone="warm">
-          <span class="tone-icon">🩷</span>
+          <span class="tone-icon warm-heart-icon">♥</span>
           <strong>Warm</strong>
           <p>Friendly, reassuring and light-hearted, while keeping everything respectful.</p>
           <small>Soft, personal and uplifting</small>
@@ -3263,14 +3311,21 @@
       const microCopyElement = document.getElementById("microCopy");
       if (activeStep && microCopyElement) {
         microCopyElement.textContent = "Take your time. There are no wrong answers, and it’s okay not to complete every box.";
-        const insertBeforeTarget =
-          activeStep.querySelector(".field-grid") ||
-          activeStep.querySelector(".sound-builder") ||
-          activeStep.querySelector(".check-list") ||
-          activeStep.querySelector(".repeat-list") ||
-          activeStep.children[2] ||
-          null;
-        activeStep.insertBefore(microCopyElement, insertBeforeTarget);
+
+        if (currentStep === 1) {
+          microCopyElement.classList.add("hidden");
+          form.appendChild(microCopyElement);
+        } else {
+          microCopyElement.classList.remove("hidden");
+          const insertBeforeTarget =
+            activeStep.querySelector(".field-grid") ||
+            activeStep.querySelector(".sound-builder") ||
+            activeStep.querySelector(".check-list") ||
+            activeStep.querySelector(".repeat-list") ||
+            activeStep.children[2] ||
+            null;
+          activeStep.insertBefore(microCopyElement, insertBeforeTarget);
+        }
       }
 
       progressFill.style.width = `${(currentStep / steps.length) * 100}%`;
@@ -3574,7 +3629,20 @@
     updateFinalPageLabels();
     updateReviewDateVisibility();
     if (document.getElementById("partyLevel")) renderMoodOptions(2, false);
+    function updateMobileSoundPlaceholders() {
+      const isMobile = window.matchMedia("(max-width: 760px)").matches;
+      document.querySelectorAll(".sound-text").forEach(input => {
+        input.placeholder = isMobile ? "Title, artist or details" : "Song title, artist, hymn, poem, psalm, reading or details";
+      });
+      document.querySelectorAll(".sound-link").forEach(input => {
+        input.placeholder = isMobile ? "Optional link" : "Optional: paste exact YouTube/web link";
+      });
+    }
+
+    updateMobileSoundPlaceholders();
+    window.addEventListener("resize", updateMobileSoundPlaceholders);
     initialiseSoundSections();
+    updateMobileSoundPlaceholders();
     hero.classList.remove("hidden");
     tonePicker.classList.add("hidden");
     wizard.classList.add("hidden");
